@@ -1,31 +1,33 @@
 NAME = cub3D
 
-	CC = cc CFLAGS = -Wall - Wextra - Werror RM = rm -
-	f
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+RM = rm -f
 
-		MLX = -lmlx APPKIT = -framework AppKit OPENGL = -framework OpenGL
+MLX = -lmlx
+APPKIT = -framework AppKit
+OPENGL = -framework OpenGL
 
-															SRC = main.c
+SRC = main.c
 
-																		OBJ = $(SRC
-																				:.c =.o)
+OBJ = $(SRC:.c=.o)
 
-			%.o : %.c Cupid.h $(CC) $(CFLAGS) -
-		c $ <
-	-o $ @
+%.o: %.c fractol.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
-		all : $(NAME)
+all : $(NAME)
 
-					$(NAME)
-	: $(OBJ) $(CC) $(OBJ) $(MLX) $(APPKIT) $(OPENGL) -
-		o $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) $(MLX) $(APPKIT) $(OPENGL) -o $(NAME)
 
-			bonus : all
+bonus : all
 
-						clean : $(RM) $(OBJ)
+clean :
+	$(RM) $(OBJ)
 
-									fclean : clean $(RM) $(NAME)
+fclean : clean
+	$(RM) $(NAME)
 
-													re : fclean all
+re : fclean all
 
-															.PHONY : clean
+.PHONY: clean
