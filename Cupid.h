@@ -44,7 +44,6 @@ typedef struct s_cub
 {
 	void				*mlx;
 	void				*win;
-	void				*img;
 	struct s_map		*map;
 	struct s_textures	*textures;
 }			t_cub;
