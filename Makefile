@@ -8,12 +8,14 @@ MLX = -lmlx
 APPKIT = -framework AppKit
 OPENGL = -framework OpenGL
 
-SRC = main.c
+SRC_UTILS = utils/ft_strchr.c utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_substr.c utils/get_next_line.c
+
+SRC = $(SRC_UTILS) main.c
 
 OBJ = $(SRC:.c=.o)
 
-%.o: %.c fractol.h
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c include/Cupid.h
+	$(CC) $(CFLAGS) -I./include -c $< -o $@
 
 all : $(NAME)
 
