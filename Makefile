@@ -8,7 +8,7 @@ MLX = -lmlx
 APPKIT = -framework AppKit
 OPENGL = -framework OpenGL
 
-SRC_UTILS = utils/ft_strchr.c utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_substr.c utils/get_next_line.c
+SRC_UTILS = utils/ft_putendl_fd.c utils/ft_strchr.c utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_substr.c utils/get_next_line.c
 
 SRC = $(SRC_UTILS) main.c
 
