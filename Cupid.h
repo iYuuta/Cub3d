@@ -7,18 +7,46 @@
 # include <unistd.h>
 
 # define TITLE "Cube3d"
-# define HEIGHT 600
-# define WIDTH 600
 
 # define ESC 53
 
 # define CLOSE_BUTTON 17
 
-typedef struct s_data
+typedef enum e_orientation
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-}			t_data;
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+}		t_orientation;
+
+typedef struct s_map
+{
+	char **map;
+	int length;
+	int width;
+	int player_position;
+	int orientation;
+}		t_map;
+
+typedef struct s_textures
+{
+	void *texture1;
+	void *texture2;
+	void *texture3;
+	void *texture4;
+	void *texture5;
+	void *texture6;
+	void *texture7;
+}		t_textures;
+
+typedef struct s_cub
+{
+	void				*mlx;
+	void				*win;
+	void				*img;
+	struct s_map		*map;
+	struct s_textures	*textures;
+}			t_cub;
 
 #endif
