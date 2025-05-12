@@ -52,6 +52,7 @@ typedef struct s_cub
 	struct s_textures	*textures;
 }						t_cub;
 
+void					ft_putendl_fd(char *s, int fd);
 size_t					ft_strlen(const char *s);
 char					*ft_strchr(const char *s, int c);
 char					*ft_strdup(const char *s1);
