@@ -13,7 +13,7 @@ static int	valid_map_name(char *str)
 	int	i;
 
 	i = ft_strlen(str) - 1;
-	if (str[i--] == 'r' && str[i--] == 'e' && str[i--] == 'b' && str[i] == '.')
+	if (str[i--] == 'b' && str[i--] == 'u' && str[i--] == 'c' && str[i] == '.')
 		return (1);
 	return (0);
 }

@@ -1,4 +1,4 @@
-#include "../include/Cupid.h"
+#include "Cupid.h"
 #include <string.h>
 
 int check_existence(t_map *map, int j, int i)
