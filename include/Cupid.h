@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:00:16 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 17:54:06 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/17 17:59:19 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ typedef struct s_data
 	struct s_textures	*textures;
 }						t_data;
 
+typedef struct s_list
+{
+	void				*content;
+	struct s_list		*next;
+
+}						t_list;
+
 // parsing
 void					check_map(int argc, char **argv);
 
@@ -74,8 +81,12 @@ int						close_window(t_data *data);
 int						key_hook(int keycode, t_data *data);
 
 // utils
-void					ft_exit(void *value);
 void					ft_error(char *message);
+void					ft_exit(void *value);
+t_list					*ft_lstnew(void *content);
+void					ft_lstadd_back(t_list **lst, t_list *new);
+int						ft_lstsize(t_list *lst);
+t_list					*ft_lstlast(t_list *lst);
 void					ft_putendl_fd(char *s, int fd);
 size_t					ft_strlen(const char *s);
 char					*ft_strchr(const char *s, int c);

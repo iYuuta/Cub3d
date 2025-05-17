@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 18:04:06 by moboulan         ###   ########.fr       */
+/*   Created: 2025/05/17 17:57:13 by moboulan          #+#    #+#             */
+/*   Updated: 2025/05/17 18:00:42 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-static int	valid_map_name(char *str)
+t_list	*ft_lstnew(void *content)
 {
-	int	i;
-	
-	if (!str || ft_strlen(str) < 4)
-		return (0);
-	i = ft_strlen(str) - 1;
-	if (str[i--] == 'b' && str[i--] == 'u' && str[i--] == 'c' && str[i] == '.')
-		return (1);
-	return (0);
-}
+	t_list	*t;
 
-void	check_map(int argc, char **argv)
-{
-	if (argc != 2)
-		ft_error("Invalid Argument: takes one argument");
-	if (!valid_map_name(argv[1]))
-		ft_error("Invalid map name: must end with .cub");
+	t = (t_list *)malloc(sizeof(t_list));
+	if (!t)
+		return (NULL);
+	t->content = content;
+	t->next = NULL;
+	return (t);
 }
