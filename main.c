@@ -24,5 +24,10 @@ int	main(int argc, char **argv)
 		ft_error("Invalid Argument: takes one argument");
 	if (!valid_map_name(argv[1]))
 		ft_error("Invalid map name: must end with .ber");
+
+	void *mlx = mlx_init();
+	mlx_new_window(mlx, 320, 320, TITLE);
+	mlx_new_image(mlx, 320, 320);
+	mlx_loop(mlx);
 	return (EXIT_SUCCESS);
 }

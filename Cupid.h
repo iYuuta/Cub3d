@@ -6,7 +6,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define TITLE "Cube3d"
+# define TITLE "Cube3D"
 
 # define ESC 53
 
@@ -49,5 +49,8 @@ typedef struct s_cub
 	struct s_map		*map;
 	struct s_textures	*textures;
 }			t_cub;
+
+void	ft_putendl_fd(char *s, int fd);
+size_t	ft_strlen(const char *s);
 
 #endif
