@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   ft_lstfree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 17:45:42 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 18:34:34 by moboulan         ###   ########.fr       */
+/*   Created: 2025/05/17 17:57:13 by moboulan          #+#    #+#             */
+/*   Updated: 2025/05/17 18:31:07 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-int	close_window(t_data *data)
+void	ft_lstfree(t_list **lst)
 {
-	ft_lstfree(&(data->map.list));
-	mlx_destroy_window(data->mlx, data->win);
-	exit(EXIT_SUCCESS);
-}
+	t_list	*ptr;
+	t_list	*node;
 
-int	key_hook(int keycode, t_data *data)
-{
-	if (keycode == ESC)
-		close_window(data);
-	return (0);
+	ptr = *lst;
+	if (!ptr)
+		return ;
+	while (ptr)
+	{
+		node = ptr->next;
+		free(ptr);
+		ptr = node;
+	}
 }

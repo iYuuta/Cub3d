@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:02:28 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 17:52:51 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:33:57 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	check_map(argc, argv);
+	check_map(argc, argv, &data);
 	init_data(&data);
 	render(&data);
 	mlx_loop(data.mlx);
