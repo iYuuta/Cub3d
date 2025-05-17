@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 17:57:13 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 18:38:18 by moboulan         ###   ########.fr       */
+/*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
+/*   Updated: 2025/05/17 18:52:16 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
+#include <stdio.h>
 
-t_list	*ft_lstnew(void *content)
+void	print_map(t_list *list)
 {
-	t_list	*t;
+	t_list	*current;
 
-	t = (t_list *)malloc(sizeof(t_list));
-	if (!t)
-		return (NULL);
-	t->content = content;
-	t->next = NULL;
-	t->prev = NULL;
-	return (t);
+	if (!list)
+		printf("map is empty\n");
+	current = list;
+	while (current)
+	{
+		printf("%s", (char *)current->content);
+		current = current->next;
+	}
+	printf("\n");
 }

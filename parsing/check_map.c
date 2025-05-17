@@ -6,11 +6,13 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 18:34:21 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:47:01 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
+
+void			print_map(t_list *list);
 
 static int	valid_map_name(char *str)
 {
@@ -37,7 +39,7 @@ static t_list	*read_map(char *str)
 	line = get_next_line(fd);
 	while (line)
 	{
-		ft_lstadd_back(&map, ft_lstnew(line));
+		ft_lstadd_back(&map, ft_lstnew(ft_strdup(line)));
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -54,4 +56,5 @@ void	check_map(int argc, char **argv, t_data *data)
 	if (!valid_map_name(argv[1]))
 		ft_error("Invalid map name: must end with .cub");
 	data->map.list = read_map(argv[1]);
+	print_map(data->map.list);
 }

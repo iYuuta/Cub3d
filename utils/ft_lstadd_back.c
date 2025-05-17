@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:57:13 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 18:00:22 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:38:54 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	{
 		node = ft_lstlast(*lst);
 		node->next = new;
+		new->prev = node;
 	}
 }
