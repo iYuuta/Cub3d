@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cupid.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/17 16:00:16 by moboulan          #+#    #+#             */
+/*   Updated: 2025/05/17 16:04:56 by moboulan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUPID_H
 # define CUPID_H
 
@@ -57,7 +69,8 @@ size_t					ft_strlen(const char *s);
 char					*ft_strchr(const char *s, int c);
 char					*ft_strdup(const char *s1);
 char					*ft_strjoin(char const *s1, char const *s2);
-char					*ft_substr(char const *s, unsigned int start, size_t len);
+char					*ft_substr(char const *s, unsigned int start,
+							size_t len);
 char					*get_next_line(int fd);
 
 #endif

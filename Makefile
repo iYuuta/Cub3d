@@ -1,7 +1,7 @@
 NAME = cub3D
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CC = cc -fsanitize=address -g 
+CFLAGS = -Wall -Wextra -Werror -O3
 RM = rm -f
 
 SRC_UTILS = utils/ft_putendl_fd.c utils/ft_strchr.c utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_substr.c utils/get_next_line.c
