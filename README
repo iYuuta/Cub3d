@@ -1,3 +1,12 @@
 # run after cloning
 
 git submodule update --init --recursive
+
+# Temporary run
+cd mlx
+make
+cd ..
+make
+
+# TODO
+make makefile go into mlx and make it like libft
