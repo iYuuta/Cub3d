@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 17:37:34 by moboulan         ###   ########.fr       */
+/*   Created: 2025/05/17 17:34:10 by moboulan          #+#    #+#             */
+/*   Updated: 2025/05/17 17:34:25 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-static int	valid_map_name(char *str)
+void	ft_error(char *message)
 {
-	int	i;
-
-	i = ft_strlen(str) - 1;
-	if (str[i--] == 'b' && str[i--] == 'u' && str[i--] == 'c' && str[i] == '.')
-		return (1);
-	return (0);
-}
-
-void	check_map(int argc, char **argv)
-{
-	if (argc != 2)
-		ft_error("Invalid Argument: takes one argument");
-	if (!valid_map_name(argv[1]))
-		ft_error("Invalid map name: must end with .ber");
+	ft_putendl_fd("Error", STDERR_FILENO);
+	ft_putendl_fd(message, STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }

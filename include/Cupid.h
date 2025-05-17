@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:00:16 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 16:04:56 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/17 17:54:06 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # endif
 
 # define TITLE "cub3D"
+# define HEIGHT 600
+# define WIDTH 600
 
-# define ESC 53
+# define ESC 65307
 
 # define CLOSE_BUTTON 17
 
@@ -56,14 +58,24 @@ typedef struct s_textures
 	void				*texture7;
 }						t_textures;
 
-typedef struct s_cub
+typedef struct s_data
 {
 	void				*mlx;
 	void				*win;
 	struct s_map		*map;
 	struct s_textures	*textures;
-}						t_cub;
+}						t_data;
 
+// parsing
+void					check_map(int argc, char **argv);
+
+// rendering
+int						close_window(t_data *data);
+int						key_hook(int keycode, t_data *data);
+
+// utils
+void					ft_exit(void *value);
+void					ft_error(char *message);
 void					ft_putendl_fd(char *s, int fd);
 size_t					ft_strlen(const char *s);
 char					*ft_strchr(const char *s, int c);

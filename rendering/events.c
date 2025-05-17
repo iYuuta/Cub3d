@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 17:37:34 by moboulan         ###   ########.fr       */
+/*   Created: 2025/05/17 17:45:42 by moboulan          #+#    #+#             */
+/*   Updated: 2025/05/17 17:51:49 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-static int	valid_map_name(char *str)
+int	close_window(t_data *data)
 {
-	int	i;
-
-	i = ft_strlen(str) - 1;
-	if (str[i--] == 'b' && str[i--] == 'u' && str[i--] == 'c' && str[i] == '.')
-		return (1);
-	return (0);
+	mlx_destroy_window(data->mlx, data->win);
+	exit(EXIT_SUCCESS);
 }
 
-void	check_map(int argc, char **argv)
+int	key_hook(int keycode, t_data *data)
 {
-	if (argc != 2)
-		ft_error("Invalid Argument: takes one argument");
-	if (!valid_map_name(argv[1]))
-		ft_error("Invalid map name: must end with .ber");
+	if (keycode == ESC)
+		close_window(data);
+	return (0);
 }
