@@ -4,12 +4,12 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -O3
 RM = rm -f
 
-SRC_UTILS = utils/ft_exit.c utils/ft_error.c utils/ft_lstnew.c utils/ft_lstadd_back.c utils/ft_lstclear.c utils/ft_lstdelone.c \
-			utils/ft_lstsize.c utils/ft_lstlast.c utils/ft_putendl_fd.c utils/ft_strchr.c \
-			utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_substr.c \
+SRC_UTILS = utils/ft_exit.c utils/ft_isin.c utils/ft_isspace.c utils/ft_error.c utils/ft_lstnew.c utils/ft_lstadd_back.c utils/ft_lstclear.c utils/ft_lstdelone.c \
+			utils/ft_lstsize.c utils/ft_lstlast.c utils/ft_putendl_fd.c utils/ft_putstr_fd.c utils/ft_split.c utils/ft_strchr.c utils/ft_strcmp.c \
+			utils/ft_strcspn.c utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_strspn.c utils/ft_substr.c \
 			utils/get_next_line.c
 
-SRC_PARSING = parsing/check_map.c parsing/print_map.c
+SRC_PARSING = parsing/check_map.c parsing/print_map.c parsing/utils.c
 
 SRC_RENDERING = rendering/events.c
 
