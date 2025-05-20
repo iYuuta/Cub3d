@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 03:26:48 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 17:56:15 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:59:02 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_list	*skip_newlines(t_cube *cube)
 	while (current)
 	{
 		line = current->content;
-		if (line && ft_strcmp(line, "\n"))
+		if (line && !ft_isallspace(line))
 			break ;
 		current = current->next;
 	}
@@ -43,7 +43,9 @@ static void	check_characters(char *line)
 void	init_map(t_cube *cube)
 {
 	t_list	*current;
+	t_list	*next;
 	char	*line;
+	char	*next_line;
 	int		i;
 
 	i = 0;
@@ -52,8 +54,14 @@ void	init_map(t_cube *cube)
 	while (current)
 	{
 		line = current->content;
-		if (line && ft_isallspace(line))
-			ft_error("Incorrect Map Structure");
+		next = current->next;
+		if (next)
+			next_line = next->content;
+		else
+			next_line = NULL;
+		if (line && !ft_isallspace(line) && current->next
+			&& ft_isallspace(next_line))
+			ft_error("Incorrect Map Structure: one or more empty lines");
 		check_characters(line);
 		cube->map[i++] = ft_strdup(line);
 		current = current->next;

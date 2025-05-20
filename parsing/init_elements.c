@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:32:30 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 17:58:39 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:50:03 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	add_element(char *str, t_cube *cube)
 {
 	static int	dup[6];
 
-	if (dup[0] > 1 || dup[1] > 1 || dup[2] > 1 || dup[3] > 1 || dup[4] > 1
-		|| dup[5] > 1)
+	if (dup[0] > 1 || dup[1] > 1 || dup[2] > 1
+		|| dup[3] > 1 || dup[4] > 1 || dup[5] > 1)
 		ft_error("Duplicate Element");
 	if (!ft_strncmp(str, "NO", 2))
 		return (dup[0]++, str += 2, cube->no = get_value(str), 1);
@@ -48,7 +48,7 @@ static int	add_element(char *str, t_cube *cube)
 	else if (!ft_strncmp(str, "C", 1))
 		return (dup[5]++, str++, cube->c = get_value(str), 1);
 	else if (*str && !ft_isin(*str, "01"))
-		ft_error("Invalid Character");
+		ft_error("Invalid Identifier");
 	return (0);
 }
 
@@ -70,10 +70,10 @@ void	init_elements(t_cube *cube)
 		while (*line && ft_isspace(*line))
 			line++;
 		if (add_element(line, cube))
-			current->content = ft_strdup("\n");
+			current->content = NULL;
 		current = current->next;
 	}
-	if (!cube->no || !cube->so || !cube->we || !cube->ea || !cube->f
-		|| !cube->c)
+	if (!cube->no || !cube->so || !cube->we
+		|| !cube->ea || !cube->f || !cube->c)
 		ft_error("Missing element");
 }
