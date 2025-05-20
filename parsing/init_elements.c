@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:32:30 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 17:16:45 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:58:39 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	add_element(char *str, t_cube *cube)
 	else if (!ft_strncmp(str, "C", 1))
 		return (dup[5]++, str++, cube->c = get_value(str), 1);
 	else if (*str && !ft_isin(*str, "01"))
-		ft_error("Invalid Element");
+		ft_error("Invalid Character");
 	return (0);
 }
 
@@ -76,6 +76,4 @@ void	init_elements(t_cube *cube)
 	if (!cube->no || !cube->so || !cube->we || !cube->ea || !cube->f
 		|| !cube->c)
 		ft_error("Missing element");
-	init_rgb(cube->f, &cube->floor_rgb);
-	init_rgb(cube->c, &cube->celling_rgb);
 }

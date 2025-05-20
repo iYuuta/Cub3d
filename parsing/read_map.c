@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 17:16:43 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:58:46 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void			print_lines(t_list *lines);
 void			print_identifiers(t_cube cube);
 void			print_rgb(t_rgb rgb);
+void			print_map(char **map);
 
 static int	valid_map_name(char *str)
 {
@@ -49,7 +50,7 @@ static t_list	*read_lines(char *str)
 	return (lines);
 }
 
-void	check_map(int argc, char **argv, t_cube *cube)
+void	parse(int argc, char **argv, t_cube *cube)
 {
 	if (argc != 2)
 		ft_error("Invalid Argument: takes one argument");
@@ -57,10 +58,13 @@ void	check_map(int argc, char **argv, t_cube *cube)
 		ft_error("Invalid file name: must end with .cub");
 	cube->lines = read_lines(argv[1]);
 	if (!cube->lines)
-		ft_error("Empty map file");
+		ft_error("Empty Map File");
 	init_elements(cube);
+	init_rgb(cube->f, &cube->floor_rgb);
+	init_rgb(cube->c, &cube->celling_rgb);
 	init_map(cube);
 	// print_identifiers(*cube);
 	// print_rgb(cube->floor_rgb);
 	// print_rgb(cube->celling_rgb);
+	print_map(cube->map);
 }
