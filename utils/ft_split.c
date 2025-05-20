@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:38:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/18 16:45:48 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 03:12:08 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*ft_copy(char const *start, char const *end)
 	return (copy);
 }
 
-static char	**ft_free_split(char **arr, int i)
+char	**ft_free_split(char **arr, int i)
 {
 	while (i > 0)
 	{

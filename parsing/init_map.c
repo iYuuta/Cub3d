@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:32:30 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 02:45:20 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 03:17:01 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void	init_elements(t_map *map)
 	}
 	if (!map->no || !map->so || !map->we || !map->ea || !map->f || !map->c)
 		ft_error("Missing element");
-	init_rgb(map->c);
-	init_rgb(map->f);
+	init_rgb(map->f, &map->floor_rgb);
+	init_rgb(map->c, &map->celling_rgb);
 }

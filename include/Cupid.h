@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:00:16 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 03:07:59 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 03:17:11 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ typedef struct s_list
 
 }					t_list;
 
+typedef struct s_rgb
+{
+	int			red;
+	int			green;
+	int			blue;
+}					t_rgb;
+
 typedef struct s_map
 {
 	t_list			*lines;
@@ -51,6 +58,8 @@ typedef struct s_map
 	char			*f;
 	char			*c;
 	char			**maze;
+	t_rgb			floor_rgb;
+	t_rgb			celling_rgb;
 }					t_map;
 
 typedef struct s_data
@@ -61,7 +70,7 @@ typedef struct s_data
 }					t_data;
 
 // parsing
-void				init_rgb(char *str);
+void				init_rgb(char *str, t_rgb *rgb);
 void				init_elements(t_map *map);
 void				check_map(int argc, char **argv, t_data *data);
 
@@ -85,6 +94,7 @@ int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putstr_fd(const char *s, int fd);
+char				**ft_free_split(char **arr, int i);
 char				**ft_split(char const *s, char c);
 size_t				ft_strlen(const char *s);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);

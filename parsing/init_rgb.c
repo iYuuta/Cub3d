@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 02:41:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 03:10:35 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 03:20:15 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	valid_number(char *str)
 	return (1);
 }
 
-void	init_rgb(char *str)
+void	init_rgb(char *str, t_rgb *rgb)
 {
 	char	**split;
 
@@ -62,5 +62,12 @@ void	init_rgb(char *str)
 	if (!valid_number(split[0])
 		|| !valid_number(split[1])
 		|| !valid_number(split[2]))
+	{
+		ft_free_split(split, 3);
 		ft_error("Invalid RGB value");
+	}
+	rgb->red = ft_atol(split[0]);
+	rgb->green = ft_atol(split[1]);
+	rgb->blue = ft_atol(split[2]);
+	ft_free_split(split, 3);
 }

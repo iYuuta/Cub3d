@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 02:25:30 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 03:19:26 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,11 @@ void	print_identifiers(t_map map)
 		printf("F : [%s]\n", map.f);
 	if (map.c)
 		printf("C : [%s]\n", map.c);
+}
+
+void	print_rgb(t_rgb rgb)
+{
+	printf("Red: [%d]\n", rgb.red);
+	printf("Green: [%d]\n", rgb.green);
+	printf("Blue: [%d]\n", rgb.blue);
 }
