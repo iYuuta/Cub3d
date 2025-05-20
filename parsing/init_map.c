@@ -6,31 +6,34 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:32:30 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 02:06:04 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 02:45:20 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-// free the elements of the map
-
 static char	*get_value(char *str)
 {
+	char	*end;
+
 	if (*str && !ft_isspace(*str))
 		return (ft_error("Need space between element and value"), NULL);
 	while (*str && ft_isspace(*str))
 		str++;
 	if (!*str)
 		return (ft_error("Empty element value"), NULL);
-	return (ft_strdup(str));
+	end = str + ft_strlen(str) - 1;
+	while (end > str && ft_isspace(*end))
+		end--;
+	return (ft_substr(str, 0, end - str + 1));
 }
 
 static void	add_element(char *str, t_map *map)
 {
 	static int	dup[6];
 
-	if (dup[0] > 1 || dup[1] > 1 || dup[2] > 1
-		|| dup[3] > 1 || dup[4] > 1 || dup[5] > 1)
+	if (dup[0] > 1 || dup[1] > 1 || dup[2] > 1 || dup[3] > 1 || dup[4] > 1
+		|| dup[5] > 1)
 		ft_error("Duplicate Element");
 	if (!ft_strncmp(str, "NO", 2))
 		(1) && (dup[0]++, str += 2, map->no = get_value(str));
@@ -48,24 +51,17 @@ static void	add_element(char *str, t_map *map)
 		ft_error("Invalid Element");
 }
 
-static void	init_identifiers(t_map *map)
+void	init_elements(t_map *map)
 {
+	t_list	*current;
+	char	*line;
+
 	map->no = NULL;
 	map->so = NULL;
 	map->we = NULL;
 	map->ea = NULL;
 	map->f = NULL;
 	map->c = NULL;
-}
-
-void	init_elements(t_map *map)
-{
-	t_list	*current;
-	char	*line;
-
-	if (!map->lines)
-		return ;
-	init_identifiers(map);
 	current = map->lines;
 	while (current)
 	{
@@ -77,4 +73,6 @@ void	init_elements(t_map *map)
 	}
 	if (!map->no || !map->so || !map->we || !map->ea || !map->f || !map->c)
 		ft_error("Missing element");
+	init_rgb(map->c);
+	init_rgb(map->f);
 }

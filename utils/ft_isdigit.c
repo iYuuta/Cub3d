@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 17:45:42 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 02:12:53 by moboulan         ###   ########.fr       */
+/*   Created: 2025/05/20 02:30:58 by moboulan          #+#    #+#             */
+/*   Updated: 2025/05/20 02:31:04 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-int	close_window(t_data *data)
+int	ft_isdigit(char c)
 {
-	ft_lstclear(&(data->map.lines), free);
-	free(data->map.no);
-	free(data->map.so);
-	free(data->map.we);
-	free(data->map.ea);
-	free(data->map.f);
-	free(data->map.c);
-	mlx_destroy_window(data->mlx, data->win);
-	exit(EXIT_SUCCESS);
-}
-
-int	key_hook(int keycode, t_data *data)
-{
-	if (keycode == ESC)
-		close_window(data);
-	return (0);
+	return ('0' <= c && c <= '9');
 }

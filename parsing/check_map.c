@@ -6,13 +6,14 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/19 19:43:49 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 02:15:57 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
 void			print_map(t_list *lines);
+void			print_identifiers(t_map map);
 
 static int	valid_map_name(char *str)
 {
@@ -56,8 +57,11 @@ void	check_map(int argc, char **argv, t_data *data)
 	if (!valid_map_name(argv[1]))
 		ft_error("Invalid map name: must end with .cub");
 	data->map.lines = read_map(argv[1]);
-	print_map(data->map.lines);
+	if (!data->map.lines)
+		ft_error("Empty map");
 	init_elements(&data->map);
+	print_map(data->map.lines);
+	print_identifiers(data->map);
 }
 
 // check later ? for the valid charaters in the map

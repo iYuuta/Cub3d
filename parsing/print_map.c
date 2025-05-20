@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/19 19:32:43 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 02:25:30 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	print_map(t_list *list)
 {
 	t_list	*current;
 
-	if (!list)
-		printf("map is empty\n");
 	current = list;
 	while (current)
 	{
@@ -27,4 +25,20 @@ void	print_map(t_list *list)
 		current = current->next;
 	}
 	printf("\n");
+}
+
+void	print_identifiers(t_map map)
+{
+	if (map.no)
+		printf("NO: [%s]\n", map.no);
+	if (map.so)
+		printf("SO: [%s]\n", map.so);
+	if (map.we)
+		printf("WE: [%s]\n", map.we);
+	if (map.ea)
+		printf("EA: [%s]\n", map.ea);
+	if (map.f)
+		printf("F : [%s]\n", map.f);
+	if (map.c)
+		printf("C : [%s]\n", map.c);
 }

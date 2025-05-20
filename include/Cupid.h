@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:00:16 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/19 19:43:18 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 03:07:59 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_data
 }					t_data;
 
 // parsing
+void				init_rgb(char *str);
 void				init_elements(t_map *map);
 void				check_map(int argc, char **argv, t_data *data);
 
@@ -69,8 +70,11 @@ int					close_window(t_data *data);
 int					key_hook(int keycode, t_data *data);
 
 // utils
+unsigned long long	ft_atol(const char *str);
 void				ft_error(char *message);
 void				ft_exit(void *value);
+int					ft_isdigit(char c);
+int					ft_isallspace(char *str);
 int					ft_isin(const char c, const char *charset);
 int					ft_isspace(char c);
 t_list				*ft_lstnew(void *content);
