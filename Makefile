@@ -9,7 +9,7 @@ SRC_UTILS = utils/ft_atol.c utils/ft_exit.c utils/ft_isallspace.c utils/ft_isdig
 			utils/ft_strcspn.c utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_strncmp.c utils/ft_strspn.c utils/ft_substr.c \
 			utils/get_next_line.c
 
-SRC_PARSING = parsing/check_map.c parsing/init_rgb.c parsing/init_map.c parsing/print_map.c
+SRC_PARSING = parsing/read_map.c parsing/init_rgb.c parsing/init_elements.c parsing/init_map.c parsing/print_map.c
 
 SRC_RENDERING = rendering/events.c
 

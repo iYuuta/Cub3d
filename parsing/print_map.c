@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 03:19:26 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 03:25:23 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // to delete later
 
-void	print_map(t_list *list)
+void	print_lines(t_list *list)
 {
 	t_list	*current;
 

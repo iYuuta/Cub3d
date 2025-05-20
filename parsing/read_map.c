@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 03:19:42 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:38:17 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-void			print_map(t_list *lines);
+void			print_lines(t_list *lines);
 void			print_identifiers(t_map map);
 void			print_rgb(t_rgb rgb);
 
@@ -61,10 +61,11 @@ void	check_map(int argc, char **argv, t_data *data)
 	if (!data->map.lines)
 		ft_error("Empty map");
 	init_elements(&data->map);
-	print_map(data->map.lines);
-	print_identifiers(data->map);
-	print_rgb(data->map.floor_rgb);
-	print_rgb(data->map.celling_rgb);
+	// init_map(&data->map);
+	print_lines(data->map.lines);
+	// print_identifiers(data->map);
+	// print_rgb(data->map.floor_rgb);
+	// print_rgb(data->map.celling_rgb);
 }
 
 // check later ? for the valid charaters in the map

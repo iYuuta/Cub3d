@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 02:41:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 03:20:15 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:39:18 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	valid_number(char *str)
 		|| (ft_strlen(str) == 1 && (str[0] == '-' || str[0] == '+' ))
 		|| ft_atol(str) == LONG_MAX + 1ul)
 		return (0);
-	if (ft_atol(str) < 0 || ft_atol(str) > 255)
+	if ((long) ft_atol(str) < 0 || (long) ft_atol(str) > 255)
 		return (0);
 	return (1);
 }

@@ -5,74 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 19:32:30 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 03:17:01 by moboulan         ###   ########.fr       */
+/*   Created: 2025/05/20 03:26:48 by moboulan          #+#    #+#             */
+/*   Updated: 2025/05/20 15:37:57 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-static char	*get_value(char *str)
-{
-	char	*end;
+// void	init_map(t_map *map)
+// {
+// 	t_list	*current;
+// 	char	*line;
 
-	if (*str && !ft_isspace(*str))
-		return (ft_error("Need space between element and value"), NULL);
-	while (*str && ft_isspace(*str))
-		str++;
-	if (!*str)
-		return (ft_error("Empty element value"), NULL);
-	end = str + ft_strlen(str) - 1;
-	while (end > str && ft_isspace(*end))
-		end--;
-	return (ft_substr(str, 0, end - str + 1));
-}
-
-static void	add_element(char *str, t_map *map)
-{
-	static int	dup[6];
-
-	if (dup[0] > 1 || dup[1] > 1 || dup[2] > 1 || dup[3] > 1 || dup[4] > 1
-		|| dup[5] > 1)
-		ft_error("Duplicate Element");
-	if (!ft_strncmp(str, "NO", 2))
-		(1) && (dup[0]++, str += 2, map->no = get_value(str));
-	else if (!ft_strncmp(str, "SO", 2))
-		(1) && (dup[1]++, str += 2, map->so = get_value(str));
-	else if (!ft_strncmp(str, "WE", 2))
-		(1) && (dup[2]++, str += 2, map->we = get_value(str));
-	else if (!ft_strncmp(str, "EA", 2))
-		(1) && (dup[3]++, str += 2, map->ea = get_value(str));
-	else if (!ft_strncmp(str, "F", 1))
-		(1) && (dup[4]++, str++, map->f = get_value(str));
-	else if (!ft_strncmp(str, "C", 1))
-		(1) && (dup[5]++, str++, map->c = get_value(str));
-	else if (*str && !ft_isin(*str, "01"))
-		ft_error("Invalid Element");
-}
-
-void	init_elements(t_map *map)
-{
-	t_list	*current;
-	char	*line;
-
-	map->no = NULL;
-	map->so = NULL;
-	map->we = NULL;
-	map->ea = NULL;
-	map->f = NULL;
-	map->c = NULL;
-	current = map->lines;
-	while (current)
-	{
-		line = current->content;
-		while (*line && ft_isspace(*line))
-			line++;
-		add_element(line, map);
-		current = current->next;
-	}
-	if (!map->no || !map->so || !map->we || !map->ea || !map->f || !map->c)
-		ft_error("Missing element");
-	init_rgb(map->f, &map->floor_rgb);
-	init_rgb(map->c, &map->celling_rgb);
-}
+// 	map->maze;
+// 	current = map->lines;
+// 	while (current)
+// 	{
+// }
