@@ -6,34 +6,34 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:02:28 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/19 19:41:42 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:51:06 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-void	render(t_data *data)
+void	render(t_cube *cube)
 {
-	(void)data;
+	(void)cube;
 }
 
-void	init_data(t_data *data)
+void	init_data(t_cube *cube)
 {
-	data->mlx = mlx_init();
-	ft_exit(data->mlx);
-	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, TITLE);
-	ft_exit(data->win);
-	mlx_hook(data->win, CLOSE_BUTTON, 0, close_window, data);
-	mlx_key_hook(data->win, key_hook, data);
+	cube->mlx = mlx_init();
+	ft_exit(cube->mlx);
+	cube->win = mlx_new_window(cube->mlx, WIDTH, HEIGHT, TITLE);
+	ft_exit(cube->win);
+	mlx_hook(cube->win, CLOSE_BUTTON, 0, close_window, cube);
+	mlx_key_hook(cube->win, key_hook, cube);
 }
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
+	t_cube	cube;
 
-	check_map(argc, argv, &data);
-	init_data(&data);
-	render(&data);
-	mlx_loop(data.mlx);
+	check_map(argc, argv, &cube);
+	init_data(&cube);
+	render(&cube);
+	mlx_loop(cube.mlx);
 	return (EXIT_SUCCESS);
 }

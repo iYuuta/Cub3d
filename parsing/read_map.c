@@ -6,14 +6,14 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 15:38:17 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:50:15 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
 void			print_lines(t_list *lines);
-void			print_identifiers(t_map map);
+void			print_identifiers(t_cube cube);
 void			print_rgb(t_rgb rgb);
 
 static int	valid_map_name(char *str)
@@ -28,44 +28,42 @@ static int	valid_map_name(char *str)
 	return (0);
 }
 
-static t_list	*read_map(char *str)
+static t_list	*read_lines(char *str)
 {
 	char	*line;
 	int		fd;
-	t_list	*map;
+	t_list	*lines;
 
-	map = NULL;
+	lines = NULL;
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-		ft_error("Invalid map file path or permisions");
+		ft_error("Invalid file path or permisions");
 	line = get_next_line(fd);
 	while (line)
 	{
-		ft_lstadd_back(&map, ft_lstnew(ft_strdup(line)));
+		ft_lstadd_back(&lines, ft_lstnew(ft_strdup(line)));
 		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
 	if (close(fd) == -1)
-		ft_error("Failed to close the map");
-	return (map);
+		ft_error("Failed to close the map file");
+	return (lines);
 }
 
-void	check_map(int argc, char **argv, t_data *data)
+void	check_map(int argc, char **argv, t_cube *cube)
 {
 	if (argc != 2)
 		ft_error("Invalid Argument: takes one argument");
 	if (!valid_map_name(argv[1]))
-		ft_error("Invalid map name: must end with .cub");
-	data->map.lines = read_map(argv[1]);
-	if (!data->map.lines)
-		ft_error("Empty map");
-	init_elements(&data->map);
-	// init_map(&data->map);
-	print_lines(data->map.lines);
-	// print_identifiers(data->map);
-	// print_rgb(data->map.floor_rgb);
-	// print_rgb(data->map.celling_rgb);
+		ft_error("Invalid file name: must end with .cub");
+	cube->lines = read_lines(argv[1]);
+	if (!cube->lines)
+		ft_error("Empty map file");
+	init_elements(cube);
+	init_map(cube);
+	print_lines(cube->lines);
+	print_identifiers(*cube);
+	print_rgb(cube->floor_rgb);
+	print_rgb(cube->celling_rgb);
 }
-
-// check later ? for the valid charaters in the map

@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:00:16 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 15:37:00 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:50:50 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,40 +43,41 @@ typedef struct s_list
 
 typedef struct s_rgb
 {
-	int			red;
-	int			green;
-	int			blue;
+	int				red;
+	int				green;
+	int				blue;
 }					t_rgb;
 
-typedef struct s_map
+typedef struct s_cube
 {
+	void			*mlx;
+	void			*win;
+
 	t_list			*lines;
+
 	char			*no;
 	char			*so;
 	char			*we;
 	char			*ea;
 	char			*f;
 	char			*c;
-	char			**maze;
+
+	char			**map;
+
 	t_rgb			floor_rgb;
 	t_rgb			celling_rgb;
-}					t_map;
 
-typedef struct s_data
-{
-	void			*mlx;
-	void			*win;
-	t_map			map;
-}					t_data;
+}					t_cube;
 
 // parsing
 void				init_rgb(char *str, t_rgb *rgb);
-void				init_elements(t_map *map);
-void				check_map(int argc, char **argv, t_data *data);
+void				init_map(t_cube *cube);
+void				init_elements(t_cube *cube);
+void				check_map(int argc, char **argv, t_cube *cube);
 
 // rendering
-int					close_window(t_data *data);
-int					key_hook(int keycode, t_data *data);
+int					close_window(t_cube *cube);
+int					key_hook(int keycode, t_cube *cube);
 
 // utils
 unsigned long long	ft_atol(const char *str);

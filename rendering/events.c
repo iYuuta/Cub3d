@@ -6,28 +6,28 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:45:42 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 02:12:53 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:50:15 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-int	close_window(t_data *data)
+int	close_window(t_cube *cube)
 {
-	ft_lstclear(&(data->map.lines), free);
-	free(data->map.no);
-	free(data->map.so);
-	free(data->map.we);
-	free(data->map.ea);
-	free(data->map.f);
-	free(data->map.c);
-	mlx_destroy_window(data->mlx, data->win);
+	ft_lstclear(&(cube->lines), free);
+	free(cube->no);
+	free(cube->so);
+	free(cube->we);
+	free(cube->ea);
+	free(cube->f);
+	free(cube->c);
+	mlx_destroy_window(cube->mlx, cube->win);
 	exit(EXIT_SUCCESS);
 }
 
-int	key_hook(int keycode, t_data *data)
+int	key_hook(int keycode, t_cube *cube)
 {
 	if (keycode == ESC)
-		close_window(data);
+		close_window(cube);
 	return (0);
 }

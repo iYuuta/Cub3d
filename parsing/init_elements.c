@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_map.c                                         :+:      :+:    :+:   */
+/*   init_elements.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:32:30 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 03:17:01 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:51:02 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*get_value(char *str)
 	return (ft_substr(str, 0, end - str + 1));
 }
 
-static void	add_element(char *str, t_map *map)
+static void	add_element(char *str, t_cube *cube)
 {
 	static int	dup[6];
 
@@ -36,43 +36,44 @@ static void	add_element(char *str, t_map *map)
 		|| dup[5] > 1)
 		ft_error("Duplicate Element");
 	if (!ft_strncmp(str, "NO", 2))
-		(1) && (dup[0]++, str += 2, map->no = get_value(str));
+		(1) && (dup[0]++, str += 2, cube->no = get_value(str));
 	else if (!ft_strncmp(str, "SO", 2))
-		(1) && (dup[1]++, str += 2, map->so = get_value(str));
+		(1) && (dup[1]++, str += 2, cube->so = get_value(str));
 	else if (!ft_strncmp(str, "WE", 2))
-		(1) && (dup[2]++, str += 2, map->we = get_value(str));
+		(1) && (dup[2]++, str += 2, cube->we = get_value(str));
 	else if (!ft_strncmp(str, "EA", 2))
-		(1) && (dup[3]++, str += 2, map->ea = get_value(str));
+		(1) && (dup[3]++, str += 2, cube->ea = get_value(str));
 	else if (!ft_strncmp(str, "F", 1))
-		(1) && (dup[4]++, str++, map->f = get_value(str));
+		(1) && (dup[4]++, str++, cube->f = get_value(str));
 	else if (!ft_strncmp(str, "C", 1))
-		(1) && (dup[5]++, str++, map->c = get_value(str));
+		(1) && (dup[5]++, str++, cube->c = get_value(str));
 	else if (*str && !ft_isin(*str, "01"))
 		ft_error("Invalid Element");
 }
 
-void	init_elements(t_map *map)
+void	init_elements(t_cube *cube)
 {
 	t_list	*current;
 	char	*line;
 
-	map->no = NULL;
-	map->so = NULL;
-	map->we = NULL;
-	map->ea = NULL;
-	map->f = NULL;
-	map->c = NULL;
-	current = map->lines;
+	cube->no = NULL;
+	cube->so = NULL;
+	cube->we = NULL;
+	cube->ea = NULL;
+	cube->f = NULL;
+	cube->c = NULL;
+	current = cube->lines;
 	while (current)
 	{
 		line = current->content;
 		while (*line && ft_isspace(*line))
 			line++;
-		add_element(line, map);
+		add_element(line, cube);
 		current = current->next;
 	}
-	if (!map->no || !map->so || !map->we || !map->ea || !map->f || !map->c)
+	if (!cube->no || !cube->so || !cube->we || !cube->ea || !cube->f
+		|| !cube->c)
 		ft_error("Missing element");
-	init_rgb(map->f, &map->floor_rgb);
-	init_rgb(map->c, &map->celling_rgb);
+	init_rgb(cube->f, &cube->floor_rgb);
+	init_rgb(cube->c, &cube->celling_rgb);
 }
