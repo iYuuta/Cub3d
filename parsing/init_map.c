@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 03:26:48 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 15:52:37 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:18:25 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	init_map(t_cube *cube)
 	while (current)
 	{
 		line = current->content;
-		printf("here %s\n", line);
+		(void) line;
+		// printf("here %s\n", line);
 		current = current->next;
 	}
 }
