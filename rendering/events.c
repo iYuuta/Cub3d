@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:45:42 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 18:51:33 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/18 16:54:29 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	close_window(t_data *data)
 {
-	ft_lstclear(&(data->map.list), free);
+	ft_lstclear(&(data->map.lines), free);
 	mlx_destroy_window(data->mlx, data->win);
 	exit(EXIT_SUCCESS);
 }

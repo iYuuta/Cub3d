@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:00:16 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/18 16:46:59 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/19 19:43:18 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include <mlx.h>
 # include <stdio.h>
+# include <stdio.h> // to remove later
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -32,16 +33,6 @@
 
 # define CLOSE_BUTTON 17
 
-enum				e_identifier
-{
-	NO,
-	SO,
-	WE,
-	EA,
-	F,
-	C
-};
-
 typedef struct s_list
 {
 	void			*content;
@@ -52,17 +43,25 @@ typedef struct s_list
 
 typedef struct s_map
 {
-	t_list			*list;
+	t_list			*lines;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	char			*f;
+	char			*c;
+	char			**maze;
 }					t_map;
 
 typedef struct s_data
 {
 	void			*mlx;
 	void			*win;
-	struct s_map	map;
+	t_map			map;
 }					t_data;
 
 // parsing
+void				init_elements(t_map *map);
 void				check_map(int argc, char **argv, t_data *data);
 
 // rendering
@@ -84,6 +83,7 @@ void				ft_putendl_fd(char *s, int fd);
 void				ft_putstr_fd(const char *s, int fd);
 char				**ft_split(char const *s, char c);
 size_t				ft_strlen(const char *s);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t				ft_strspn(const char *s, const char *accept);
 char				*ft_strchr(const char *s, int c);
 int					ft_strcmp(const char *s1, const char *s2);

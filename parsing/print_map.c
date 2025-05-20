@@ -6,12 +6,13 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 18:52:16 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/19 19:32:43 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
-#include <stdio.h>
+
+// to delete later
 
 void	print_map(t_list *list)
 {

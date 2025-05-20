@@ -6,10 +6,10 @@ RM = rm -f
 
 SRC_UTILS = utils/ft_exit.c utils/ft_isin.c utils/ft_isspace.c utils/ft_error.c utils/ft_lstnew.c utils/ft_lstadd_back.c utils/ft_lstclear.c utils/ft_lstdelone.c \
 			utils/ft_lstsize.c utils/ft_lstlast.c utils/ft_putendl_fd.c utils/ft_putstr_fd.c utils/ft_split.c utils/ft_strchr.c utils/ft_strcmp.c \
-			utils/ft_strcspn.c utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_strspn.c utils/ft_substr.c \
+			utils/ft_strcspn.c utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_strncmp.c utils/ft_strspn.c utils/ft_substr.c \
 			utils/get_next_line.c
 
-SRC_PARSING = parsing/check_map.c parsing/print_map.c parsing/utils.c
+SRC_PARSING = parsing/check_map.c parsing/init_map.c parsing/print_map.c
 
 SRC_RENDERING = rendering/events.c
 
@@ -18,12 +18,13 @@ SRC = $(SRC_UTILS) $(SRC_PARSING) $(SRC_RENDERING) main.c
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c include/Cupid.h
-	$(CC) $(CFLAGS) -c $< -o $@ -Iinclude -Imlx -fsanitize=address -g
+	$(CC) $(CFLAGS) -c $< -o $@ -Iinclude -Imlx 
 
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) -Lmlx -lmlx -lXext -lX11 -fsanitize=address -g
+	$(CC) $(OBJ) -o $(NAME) -Lmlx -lmlx -lXext -lX11
+	$(RM) $(OBJ)
 
 bonus : all
 
