@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 16:53:41 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:16:43 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ void	check_map(int argc, char **argv, t_cube *cube)
 		ft_error("Empty map file");
 	init_elements(cube);
 	init_map(cube);
-	print_lines(cube->lines);
-	print_identifiers(*cube);
-	print_rgb(cube->floor_rgb);
-	print_rgb(cube->celling_rgb);
+	// print_identifiers(*cube);
+	// print_rgb(cube->floor_rgb);
+	// print_rgb(cube->celling_rgb);
 }
