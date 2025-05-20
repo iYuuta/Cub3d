@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:32:30 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 16:13:04 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:48:08 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ void	init_elements(t_cube *cube)
 		while (*line && ft_isspace(*line))
 			line++;
 		if (add_element(line, cube))
-		{
-			free(current->content);
 			current->content = ft_strdup("\n");
-		}
 		current = current->next;
 	}
 	if (!cube->no || !cube->so || !cube->we || !cube->ea || !cube->f

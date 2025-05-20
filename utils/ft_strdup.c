@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:01:31 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 16:05:08 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:46:11 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(const char *s1)
 	size_t	s1_len;
 
 	s1_len = ft_strlen(s1);
-	s2 = (char *)malloc(s1_len + 1);
+	s2 = (char *)ft_malloc(s1_len + 1);
 	if (!s2)
 		return (NULL);
 	s2_start = s2;

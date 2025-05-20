@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 15:50:15 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:53:41 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ static t_list	*read_lines(char *str)
 	while (line)
 	{
 		ft_lstadd_back(&lines, ft_lstnew(ft_strdup(line)));
-		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	if (close(fd) == -1)
 		ft_error("Failed to close the map file");
 	return (lines);

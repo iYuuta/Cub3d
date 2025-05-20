@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_gc.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 17:57:13 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 18:51:47 by moboulan         ###   ########.fr       */
+/*   Created: 2025/05/20 16:42:28 by moboulan          #+#    #+#             */
+/*   Updated: 2025/05/20 16:44:26 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+t_gc	**ft_gc(void)
 {
-	t_list	*node;
+	static t_gc	*head;
 
-	if (!lst || !del)
-		return ;
-	while (*lst)
-	{
-		node = *lst;
-		*lst = (*lst)->next;
-		ft_lstdelone(node, del);
-	}
+	return (&head);
 }

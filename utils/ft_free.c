@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 17:45:42 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 16:53:20 by moboulan         ###   ########.fr       */
+/*   Created: 2025/05/20 16:44:18 by moboulan          #+#    #+#             */
+/*   Updated: 2025/05/20 16:51:21 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-int	close_window(t_cube *cube)
+void	ft_free(void)
 {
-	mlx_destroy_window(cube->mlx, cube->win);
-	ft_exit(EXIT_SUCCESS);
-	return (0);
-}
+	t_gc	**head;
+	t_gc	*curr;
+	t_gc	*temp;
 
-int	key_hook(int keycode, t_cube *cube)
-{
-	if (keycode == ESC)
-		close_window(cube);
-	return (0);
+	head = NULL;
+	head = ft_gc();
+	curr = *head;
+	while (curr)
+	{
+		temp = curr;
+		curr = curr->next;
+		free(temp->ptr);
+		temp->ptr = NULL;
+		free(temp);
+		temp = NULL;
+	}
+	*head = NULL;
 }

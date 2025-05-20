@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:02:01 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 16:11:30 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:54:33 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ static char	*ft_read(int fd, char *buffer, char *storage)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-			return (free(storage), storage = NULL, NULL);
+			return (storage = NULL, NULL);
 		if (bytes_read == 0)
 			return (storage);
 		buffer[bytes_read] = '\0';
 		new_storage = ft_strjoin(storage, buffer);
-		free(storage);
 		if (!new_storage)
 			return (NULL);
 		storage = new_storage;
@@ -63,9 +62,8 @@ static char	*ft_update_storage(char *storage)
 	if (storage[len] == '\n')
 		len++;
 	new_storage = ft_strdup(&storage[len]);
-	free(storage);
 	if (new_storage && new_storage[0] == '\0')
-		return (free(new_storage), NULL);
+		return (NULL);
 	return (new_storage);
 }
 
@@ -77,11 +75,10 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = (char *)malloc((size_t)BUFFER_SIZE + 1);
+	buffer = (char *)ft_malloc((size_t)BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
 	storage = ft_read(fd, buffer, storage);
-	free(buffer);
 	buffer = NULL;
 	line = ft_get_line(storage);
 	storage = ft_update_storage(storage);

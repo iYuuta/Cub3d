@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:00:16 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 15:50:50 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:55:38 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ typedef struct s_list
 	struct s_list	*prev;
 
 }					t_list;
+
+typedef struct s_gc
+{
+	void			*ptr;
+	struct s_gc		*next;
+
+}					t_gc;
 
 typedef struct s_rgb
 {
@@ -82,16 +89,17 @@ int					key_hook(int keycode, t_cube *cube);
 // utils
 unsigned long long	ft_atol(const char *str);
 void				ft_error(char *message);
-void				ft_exit(void *value);
+void				ft_exit(int exit_status);
+void				ft_free(void);
+t_gc				**ft_gc(void);
 int					ft_isdigit(char c);
 int					ft_isallspace(char *str);
 int					ft_isin(const char c, const char *charset);
 int					ft_isspace(char c);
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_back(t_list **lst, t_list *new);
-void				ft_lstclear(t_list **lst, void (*del)(void *));
-void				ft_lstdelone(t_list *lst, void (*del)(void *));
 int					ft_lstsize(t_list *lst);
+void				*ft_malloc(size_t size);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putstr_fd(const char *s, int fd);

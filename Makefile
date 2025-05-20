@@ -4,8 +4,9 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -O3
 RM = rm -f
 
-SRC_UTILS = utils/ft_atol.c utils/ft_exit.c utils/ft_isallspace.c utils/ft_isdigit.c utils/ft_isin.c utils/ft_isspace.c utils/ft_error.c utils/ft_lstnew.c utils/ft_lstadd_back.c utils/ft_lstclear.c utils/ft_lstdelone.c \
-			utils/ft_lstsize.c utils/ft_lstlast.c utils/ft_putendl_fd.c utils/ft_putstr_fd.c utils/ft_split.c utils/ft_strchr.c utils/ft_strcmp.c \
+SRC_UTILS = utils/ft_atol.c utils/ft_exit.c utils/ft_free.c utils/ft_gc.c utils/ft_isallspace.c utils/ft_isdigit.c utils/ft_isin.c utils/ft_isspace.c \
+			utils/ft_error.c utils/ft_lstnew.c utils/ft_lstadd_back.c \
+			utils/ft_lstsize.c utils/ft_malloc.c utils/ft_lstlast.c utils/ft_putendl_fd.c utils/ft_putstr_fd.c utils/ft_split.c utils/ft_strchr.c utils/ft_strcmp.c \
 			utils/ft_strcspn.c utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_strncmp.c utils/ft_strspn.c utils/ft_substr.c \
 			utils/get_next_line.c
 
@@ -18,12 +19,12 @@ SRC = $(SRC_UTILS) $(SRC_PARSING) $(SRC_RENDERING) main.c
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c include/Cupid.h
-	$(CC) $(CFLAGS) -c $< -o $@ -Iinclude -Imlx 
+	$(CC) $(CFLAGS) -c $< -o $@ -Iinclude -Imlx
 
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) -Lmlx -lmlx -lXext -lX11
+	$(CC) $(OBJ) -o $(NAME) -Lmlx -lmlx -lXext -lX11 -fsanitize=address -g
 	$(RM) $(OBJ)
 
 bonus : all

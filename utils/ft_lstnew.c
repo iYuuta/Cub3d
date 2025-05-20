@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:57:13 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 18:38:18 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:45:11 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*t;
 
-	t = (t_list *)malloc(sizeof(t_list));
+	t = (t_list *)ft_malloc(sizeof(t_list));
 	if (!t)
 		return (NULL);
 	t->content = content;

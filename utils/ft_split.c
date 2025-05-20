@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:38:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 03:12:08 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:47:46 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*ft_copy(char const *start, char const *end)
 	char	*copy;
 
 	i = 0;
-	copy = (char *)malloc(end - start + 1);
+	copy = (char *)ft_malloc(end - start + 1);
 	if (!copy)
 		return (NULL);
 	while (start < end)
@@ -47,24 +47,13 @@ static char	*ft_copy(char const *start, char const *end)
 	return (copy);
 }
 
-char	**ft_free_split(char **arr, int i)
-{
-	while (i > 0)
-	{
-		i--;
-		free(arr[i]);
-	}
-	free(arr);
-	return (NULL);
-}
-
 char	**ft_split(char const *s, char c)
 {
 	char		**arr;
 	char const	*start;
 	int			i;
 
-	arr = (char **)malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
+	arr = (char **)ft_malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
 	if (!arr)
 		return (NULL);
 	i = 0;
@@ -78,8 +67,6 @@ char	**ft_split(char const *s, char c)
 			while (*s && *s != c)
 				s++;
 			arr[i] = ft_copy(start, s);
-			if (!arr[i])
-				return (ft_free_split(arr, i));
 			i++;
 		}
 	}

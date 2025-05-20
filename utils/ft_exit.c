@@ -6,14 +6,14 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:49:38 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/17 17:49:46 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:45:41 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
-void	ft_exit(void *value)
+void	ft_exit(int exit_status)
 {
-	if (!value)
-		exit(EXIT_FAILURE);
+	ft_free();
+	exit(exit_status);
 }
