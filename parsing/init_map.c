@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 03:26:48 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 19:59:02 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:47:16 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	check_characters(char *line)
 	{
 		if (!ft_isin(*line, "10NSEW") && !ft_isspace(*line))
 			ft_error("Invalid Map Character");
+		if (*line == 9)
+			ft_error("Map should not contain tabs");
 		line++;
 	}
 }

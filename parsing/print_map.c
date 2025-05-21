@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 17:57:43 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:08:00 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,5 @@ void	print_map(char **map)
 		printf("%s", map[i]);
 		i++;
 	}
+	printf("\n");
 }
