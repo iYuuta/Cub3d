@@ -48,30 +48,3 @@ int	check_borders(t_map *map)
 	}
 	return (0);
 }
-
-int main()
-{
-    t_map map;
-    
-    map.length = 6;
-    map.map = malloc(sizeof(char *) * (map.length + 1));
-    map.map[0] = strdup("  1   111111    1111111");
-    map.map[1] = strdup("111111101 111111111");
-    map.map[2] = strdup("10000111 111000001");
-    map.map[3] = strdup("100001  1  100111");
-    map.map[4] = strdup("10001111 110000011");
-    map.map[5] = strdup("11111  111 1111111");
-    map.map[6] = NULL;
-
-    if (check_borders(&map))
-        printf("Error\ninvalid map\n");
-    else
-        printf("Valid map\n");
-
-    for (int i = 0; i < map.length; i++) {
-        free(map.map[i]);
-    }
-    free(map.map);
-
-    return 0;
-}

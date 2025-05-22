@@ -20,9 +20,13 @@ static int	valid_map_name(char *str)
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
-		ft_error("Invalid Argument: takes one argument");
-	if (!valid_map_name(argv[1]))
-		ft_error("Invalid map name: must end with .ber");
+	// if (argc != 2)
+	// 	ft_error("Invalid Argument: takes one argument");
+	// if (!valid_map_name(argv[1]))
+	// 	ft_error("Invalid map name: must end with .cub");
+	t_cub *cub;
+	
+	cub = create_map();
+	player_movement(cub);
 	return (EXIT_SUCCESS);
 }
