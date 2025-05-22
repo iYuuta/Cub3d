@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:32:30 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 19:50:03 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:01:17 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*get_value(char *str)
 	while (*str && ft_isspace(*str))
 		str++;
 	if (!*str)
-		return (ft_error("Empty element value"), NULL);
+		return (ft_error("Empty Element value"), NULL);
 	end = str + ft_strlen(str) - 1;
 	while (end > str && ft_isspace(*end))
 		end--;
@@ -47,8 +47,8 @@ static int	add_element(char *str, t_cube *cube)
 		return (dup[4]++, str++, cube->f = get_value(str), 1);
 	else if (!ft_strncmp(str, "C", 1))
 		return (dup[5]++, str++, cube->c = get_value(str), 1);
-	else if (*str && !ft_isin(*str, "01"))
-		ft_error("Invalid Identifier");
+	else if (*str && !ft_isin(*str, "01NSEW"))
+		ft_error("Invalid Element");
 	return (0);
 }
 
@@ -75,5 +75,5 @@ void	init_elements(t_cube *cube)
 	}
 	if (!cube->no || !cube->so || !cube->we
 		|| !cube->ea || !cube->f || !cube->c)
-		ft_error("Missing element");
+		ft_error("Missing Element");
 }

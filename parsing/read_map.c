@@ -6,14 +6,14 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/21 14:28:59 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:40:56 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cupid.h"
 
 void			print_lines(t_list *lines);
-void			print_identifiers(t_cube cube);
+void			print_elements(t_cube cube);
 void			print_rgb(t_rgb rgb);
 void			print_map(char **map);
 
@@ -50,10 +50,10 @@ static t_list	*read_lines(char *str)
 	return (lines);
 }
 
-
-static void check_map(char **map)
+static void	check_map(char **map)
 {
-	int i, j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map[i])
@@ -61,19 +61,22 @@ static void check_map(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0')
+			if (i == 0 || j == 0 
+				|| (map[i][j - 1] && ft_isspace(map[i][j - 1]))
+				|| (map[i][j + 1] && ft_isspace(map[i][j + 1])) 
+				|| (map[i - 1] && map[i - 1][j] && ft_isspace(map[i - 1][j])) 
+				|| (map[i + 1] && map[i + 1][j] && ft_isspace(map[i + 1][j])))
 			{
-				if (i == 0 || j == 0 || !map[i + 1] || !map[i - 1][j] || !map[i + 1][j] 
-					|| ft_isspace(map[i][j - 1]) || ft_isspace(map[i][j + 1])
-					|| ft_isspace(map[i - 1][j]) || ft_isspace(map[i + 1][j]))
+				if (map[i][j] == '0')
 					ft_error("Map must be surrounded by walls");
+				else if (ft_isin(map[i][j], "NSEW"))
+					ft_error("Player can't be outside the map");
 			}
 			j++;
 		}
 		i++;
 	}
 }
-
 
 void	parse(int argc, char **argv, t_cube *cube)
 {
@@ -88,9 +91,9 @@ void	parse(int argc, char **argv, t_cube *cube)
 	init_rgb(cube->f, &cube->floor_rgb);
 	init_rgb(cube->c, &cube->celling_rgb);
 	init_map(cube);
-	// print_identifiers(*cube);
-	// print_rgb(cube->floor_rgb);
-	// print_rgb(cube->celling_rgb);
+	print_elements(*cube);
+	print_rgb(cube->floor_rgb);
+	print_rgb(cube->celling_rgb);
 	check_map(cube->map);
 	print_map(cube->map);
 }

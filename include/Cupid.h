@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:00:16 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 17:58:19 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:32:25 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_rgb
 	int				blue;
 }					t_rgb;
 
+
 typedef struct s_cube
 {
 	void			*mlx;
@@ -70,7 +71,7 @@ typedef struct s_cube
 	char			*c;
 
 	char			**map;
-
+	size_t			map_length;
 	t_rgb			floor_rgb;
 	t_rgb			celling_rgb;
 
@@ -79,6 +80,7 @@ typedef struct s_cube
 // parsing
 void				init_rgb(char *str, t_rgb *rgb);
 void				init_map(t_cube *cube);
+int					check_borders(t_cube *cube);
 void				init_elements(t_cube *cube);
 void				parse(int argc, char **argv, t_cube *cube);
 

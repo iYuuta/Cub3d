@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 20:08:00 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:52:56 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_lines(t_list *list)
 	printf("\n");
 }
 
-void	print_identifiers(t_cube cube)
+void	print_elements(t_cube cube)
 {
 	if (cube.no)
 		printf("NO: [%s]\n", cube.no);
