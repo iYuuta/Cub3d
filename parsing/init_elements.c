@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:32:30 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/21 15:01:17 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:44:04 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	add_element(char *str, t_cube *cube)
 	else if (!ft_strncmp(str, "C", 1))
 		return (dup[5]++, str++, cube->c = get_value(str), 1);
 	else if (*str && !ft_isin(*str, "01NSEW"))
-		ft_error("Invalid Element");
+		ft_error("Invalid Map Character");
 	return (0);
 }
 

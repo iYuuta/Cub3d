@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/22 23:40:56 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:48:06 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,34 +50,6 @@ static t_list	*read_lines(char *str)
 	return (lines);
 }
 
-static void	check_map(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (i == 0 || j == 0 
-				|| (map[i][j - 1] && ft_isspace(map[i][j - 1]))
-				|| (map[i][j + 1] && ft_isspace(map[i][j + 1])) 
-				|| (map[i - 1] && map[i - 1][j] && ft_isspace(map[i - 1][j])) 
-				|| (map[i + 1] && map[i + 1][j] && ft_isspace(map[i + 1][j])))
-			{
-				if (map[i][j] == '0')
-					ft_error("Map must be surrounded by walls");
-				else if (ft_isin(map[i][j], "NSEW"))
-					ft_error("Player can't be outside the map");
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
 void	parse(int argc, char **argv, t_cube *cube)
 {
 	if (argc != 2)
@@ -94,6 +66,7 @@ void	parse(int argc, char **argv, t_cube *cube)
 	print_elements(*cube);
 	print_rgb(cube->floor_rgb);
 	print_rgb(cube->celling_rgb);
-	check_map(cube->map);
 	print_map(cube->map);
+	check_map(cube->map);
+	check_player(cube->map);
 }
