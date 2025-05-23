@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 03:26:48 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/22 23:40:20 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:03:29 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_map(t_cube *cube)
 
 	i = 0;
 	current = skip_newlines(cube);
-	cube->map = ft_malloc((ft_lstsize(current) + 1) * sizeof(char *));
+	cube->map.map = ft_malloc((ft_lstsize(current) + 1) * sizeof(char *));
 	while (current)
 	{
 		line = current->content;
@@ -58,9 +58,9 @@ void	init_map(t_cube *cube)
 			&& ft_isallspace(current->next->content))
 			ft_error("Incorrect Map Structure: one or more empty lines");
 		check_characters(line);
-		cube->map[i++] = ft_strdup(line);
+		cube->map.map[i++] = ft_strdup(line);
 		current = current->next;
 	}
-	cube->map_length = i;
-	cube->map[i] = NULL;
+	cube->map.length = i;
+	cube->map.map[i] = NULL;
 }

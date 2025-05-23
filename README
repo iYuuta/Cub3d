@@ -6,7 +6,6 @@ git submodule update --init --recursive
 # TODO
 make makefile go into mlx and make it like libft
 
-add reading textures
 
 delete print_map later
 
@@ -14,3 +13,7 @@ remove relink
 
 make the cube also static to avoid sending it in ft_error
 and avoid leaks to destroy images
+
+rename map map 
+
+merge parsing and execution

@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/23 11:38:07 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:03:31 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void			print_elements(t_cube cube);
 void			print_rgb(t_rgb rgb);
 void			print_map(char **map);
 
-static int	valid_map_name(char *str)
+static int	valid_file_name(char *str)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ void	parse(int argc, char **argv, t_cube *cube)
 {
 	if (argc != 2)
 		ft_error("Invalid Argument: takes one argument");
-	if (!valid_map_name(argv[1]))
+	if (!valid_file_name(argv[1]))
 		ft_error("Invalid file name: must end with .cub");
 	cube->lines = read_lines(argv[1]);
 	if (!cube->lines)
@@ -66,7 +66,7 @@ void	parse(int argc, char **argv, t_cube *cube)
 	print_elements(*cube);
 	print_rgb(cube->floor_rgb);
 	print_rgb(cube->celling_rgb);
-	print_map(cube->map);
-	check_map(cube->map);
-	check_player(cube->map);
+	print_map(cube->map.map);
+	check_map(cube->map.map);
+	check_player(cube->map.map);
 }

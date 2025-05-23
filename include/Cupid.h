@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:00:16 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/23 11:37:33 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:59:56 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ typedef struct s_texture
 
 }					t_texture;
 
+typedef struct s_map
+{
+	char			**map;
+	int				length;
+}					t_map;
+
 typedef struct s_cube
 {
 	void			*mlx;
@@ -73,6 +79,8 @@ typedef struct s_cube
 	char			*f;
 	char			*c;
 
+	t_map			map;
+
 	t_texture		no;
 	t_texture		so;
 	t_texture		we;
@@ -80,9 +88,6 @@ typedef struct s_cube
 
 	t_rgb			floor_rgb;
 	t_rgb			celling_rgb;
-
-	char			**map;
-	size_t			map_length;
 
 }					t_cube;
 
