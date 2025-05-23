@@ -24,7 +24,7 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) -Lmlx -lmlx -lXext -lX11 -fsanitize=address -g
+	$(CC) $(OBJ) -o $(NAME) -Lmlx -lmlx -lXext -lX11 #-fsanitize=address -g
 	$(RM) $(OBJ)
 
 bonus : all

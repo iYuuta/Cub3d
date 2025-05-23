@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:02:28 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 19:40:03 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:53:23 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	main(int argc, char **argv)
 {
 	t_cube	cube;
 
-	parse(argc, argv, &cube);
 	init_data(&cube);
+	parse(argc, argv, &cube);
 	render(&cube);
 	mlx_loop(cube.mlx);
 	ft_free();

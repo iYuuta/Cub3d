@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 23:45:44 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/22 23:48:51 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:54:22 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	check_map(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (i == 0 || j == 0
-				|| (map[i][j - 1] && ft_isspace(map[i][j - 1]))
-				|| (map[i][j + 1] && ft_isspace(map[i][j + 1]))
-				|| (map[i - 1] && map[i - 1][j] && ft_isspace(map[i - 1][j]))
-				|| (map[i + 1] && map[i + 1][j] && ft_isspace(map[i + 1][j])))
+			if (i == 0 || j == 0 || !map[i + 1] || !map[i][j + 1]
+				|| j >= (int)ft_strlen(map[i + 1])
+				|| j >= (int)ft_strlen(map[i - 1])
+				|| ft_isspace(map[i][j - 1]) || ft_isspace(map[i][j + 1])
+				|| ft_isspace(map[i - 1][j]) || ft_isspace(map[i + 1][j]))
 			{
 				if (map[i][j] == '0')
 					ft_error("Map must be surrounded by walls");

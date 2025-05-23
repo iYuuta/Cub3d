@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:45:42 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/20 16:53:20 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:50:12 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 int	close_window(t_cube *cube)
 {
+	mlx_destroy_image(cube->mlx, cube->no.texture);
+	mlx_destroy_image(cube->mlx, cube->so.texture);
+	mlx_destroy_image(cube->mlx, cube->we.texture);
+	mlx_destroy_image(cube->mlx, cube->ea.texture);
 	mlx_destroy_window(cube->mlx, cube->win);
 	ft_exit(EXIT_SUCCESS);
 	return (0);
