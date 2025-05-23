@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:59:59 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/23 12:03:31 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:40:48 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	parse(int argc, char **argv, t_cube *cube)
 	if (argc != 2)
 		ft_error("Invalid Argument: takes one argument");
 	if (!valid_file_name(argv[1]))
-		ft_error("Invalid file name: must end with .cub");
+		ft_error("Invalid file name: must end with .cube");
 	cube->lines = read_lines(argv[1]);
 	if (!cube->lines)
 		ft_error("Empty Map File");

@@ -12,7 +12,7 @@ SRC_UTILS = utils/ft_atol.c utils/ft_exit.c utils/ft_free.c utils/ft_gc.c utils/
 
 SRC_PARSING = parsing/read_map.c parsing/init_rgb.c parsing/check_map.c parsing/init_elements.c parsing/init_map.c parsing/print_map.c
 
-SRC_RENDERING = rendering/events.c
+SRC_RENDERING = rendering/events.c  rendering/movement.c rendering/raycasting.c rendering/render.c
 
 SRC = $(SRC_UTILS) $(SRC_PARSING) $(SRC_RENDERING) main.c
 
@@ -24,7 +24,7 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) -Lmlx -lmlx -lXext -lX11 #-fsanitize=address -g
+	$(CC) $(OBJ) -o $(NAME) -Lmlx -lmlx -lXext -lX11 -lm #-fsanitize=address -g
 	$(RM) $(OBJ)
 
 bonus : all

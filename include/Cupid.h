@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:00:16 by moboulan          #+#    #+#             */
-/*   Updated: 2025/05/23 11:59:56 by moboulan         ###   ########.fr       */
+/*   Updated: 2025/05/23 13:06:07 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <limits.h>
+# include <math.h>
 # include <mlx.h>
 # include <stdio.h>
 # include <stdio.h> // to remove later
@@ -32,6 +33,20 @@
 # define ESC 65307
 
 # define CLOSE_BUTTON 17
+
+# define W 119
+# define D 100
+# define S 115
+# define A 97
+
+# define UP 65362
+# define DOWN 65364
+# define LEFT 65361
+# define RIGHT 65363
+
+# define TILE_SIZE 64
+# define PI 3.1415929
+# define FOV 1.047197633
 
 typedef struct s_list
 {
@@ -70,6 +85,30 @@ typedef struct s_map
 	int				length;
 }					t_map;
 
+typedef struct s_ray
+{
+	int				side;
+	float			dist;
+	int				curr_x;
+	int				curr_y;
+	float			x_step;
+	float			y_step;
+	float			y_dir;
+	float			x_dir;
+	float			x_dist;
+	float			y_dist;
+	float			x_side_dis;
+	float			y_side_dis;
+}					t_ray;
+
+typedef struct s_player
+{
+	float			y;
+	float			x;
+	float			h_angle;
+	float			v_angle;
+}					t_player;
+
 typedef struct s_cube
 {
 	void			*mlx;
@@ -79,7 +118,9 @@ typedef struct s_cube
 	char			*f;
 	char			*c;
 
+	t_ray			ray;
 	t_map			map;
+	t_player		player;
 
 	t_texture		no;
 	t_texture		so;
@@ -100,6 +141,11 @@ void				init_elements(t_cube *cube);
 void				parse(int argc, char **argv, t_cube *cube);
 
 // rendering
+
+void				render(t_cube *cube);
+float				fix_angle(float angle);
+void				raycasting(t_cube *cube, float new_angle);
+int					detect_move(int move, void *ptr);
 int					close_window(t_cube *cube);
 int					key_hook(int keycode, t_cube *cube);
 
