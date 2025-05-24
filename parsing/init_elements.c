@@ -60,6 +60,34 @@ static void	init_texture(t_cube *cube)
 		ft_error("Failed to load the EA texture file");
 }
 
+static void	init_addr(t_cube *cube)
+{
+	cube->no.addr = mlx_get_data_addr(cube->no.texture,
+			&cube->no.bits_per_pixel,
+			&cube->no.size_line,
+			&cube->no.endian);
+	if (!cube->no.addr)
+		ft_error("Failed to init the NO address");
+	cube->so.addr = mlx_get_data_addr(cube->so.texture,
+			&cube->so.bits_per_pixel,
+			&cube->so.size_line,
+			&cube->so.endian);
+	if (!cube->so.addr)
+		ft_error("Failed to init the SO address");
+	cube->we.addr = mlx_get_data_addr(cube->we.texture,
+			&cube->we.bits_per_pixel,
+			&cube->we.size_line,
+			&cube->we.endian);
+	if (!cube->we.addr)
+		ft_error("Failed to init the WE address");
+	cube->ea.addr = mlx_get_data_addr(cube->ea.texture,
+			&cube->ea.bits_per_pixel,
+			&cube->ea.size_line,
+			&cube->ea.endian);
+	if (!cube->ea.addr)
+		ft_error("Failed to init the EA address");
+}
+
 void	init_elements(t_cube *cube)
 {
 	t_list	*current;
@@ -85,4 +113,5 @@ void	init_elements(t_cube *cube)
 		|| !cube->f || !cube->c)
 		ft_error("Missing Element");
 	init_texture(cube);
+	init_addr(cube);
 }

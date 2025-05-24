@@ -10,23 +10,35 @@ void	pixel_put(t_texture *texture, int x, int y, int color)
 	*(int *)(texture->addr + offset) = color;
 }
 
+int	get_pixel(t_texture texture, int x, int y)
+{
+	int	offset;
+
+	x = x % 64;
+	y = y % 64;
+	if (x < 0 || x > texture.width || y < 0 || y > texture.height)
+		return (0);
+	offset = y * texture.size_line + x * (texture.bits_per_pixel / 8);
+	return (*(int *)(texture.addr + offset));
+}
+
 void draw_line(t_cube *cub, int x, float dir)
 {
     int y;
-    float line_hight;
+    float line_height;
     float fix;
 
     y = 0;
     ray_casting(cub, dir);
     fix = fix_angle(cub->player.h_angle - dir);
-    line_hight = (TILE_SIZE * HEIGHT) / (cub->ray.dist * cos(fix));
-    while (y < (HEIGHT - line_hight) / 2)
+    line_height = (TILE_SIZE * HEIGHT) / (cub->ray.dist * cos(fix));
+    while (y < (HEIGHT - line_height) / 2)
         mlx_pixel_put(cub->mlx, cub->win, x, y++, cub->celling);
-    if (line_hight > HEIGHT)
-        line_hight = HEIGHT;
-    while (line_hight-- > 0)
+    if (line_height > HEIGHT)
+        line_height = HEIGHT;
+    while (line_height-- > 0)
     {
-        mlx_pixel_put(cub->mlx, cub->win, x, y, RED);
+        mlx_pixel_put(cub->mlx, cub->win, x, y, get_pixel(cub->no, x, ((y - (HEIGHT / 2.0f) - (line_height / 2.0f)) / (line_height)) * cub->no.height));
         y++;
     }
     while (y < HEIGHT)
