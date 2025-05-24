@@ -1,50 +1,54 @@
 #include "Cupid.h"
-#include <string.h>
 
-int check_existence(t_map *map, int j, int i)
+void	check_map(char **map)
 {
-	if (j == 0 || j + 1 == map->length)
-		return (1);
-	if (i >= strlen(map->map[j - 1]) || i >= strlen(map->map[j + 1]))
-		return (1);
-	return (0);
-}
+	int	i;
+	int	j;
 
-int check_surroundings(char **str, int i, int j)
-{
-	int track;
-
-	track = 0;
-	if (str[j][i + 1] == ' ')
-		return (1);
-	if (str[j][i - 1] == ' ')
-		return (1);
-	if (str[j + 1][i] == ' ')
-		return (1);
-	if (str[j - 1][i] == ' ')
-		return (1);
-	return (0);
-}
-
-int	check_borders(t_map *map)
-{
-	int i;
-	int j;
-	int flag;
-
-	j = -1;
-	while (map->map[++j])
+	i = 0;
+	while (map[i])
 	{
-		i = -1;
-		while (map->map[j][++i])
+		j = 0;
+		while (map[i][j])
 		{
-			if (!strchr("10 ", map->map[j][i]))
-				return (1);
-			if (check_existence(map, j, i) && (map->map[j][i] != '1' && map->map[j][i] != ' '))
-				return (1);
-			else if ((map->map[j][i] != '1' && map->map[j][i] != ' ') && check_surroundings(map->map, i, j))
-				return (1);
+			if (i == 0 || j == 0 || !map[i + 1] || !map[i][j + 1]
+				|| j >= (int)ft_strlen(map[i + 1])
+				|| j >= (int)ft_strlen(map[i - 1])
+				|| ft_isspace(map[i][j - 1]) || ft_isspace(map[i][j + 1])
+				|| ft_isspace(map[i - 1][j]) || ft_isspace(map[i + 1][j]))
+			{
+				if (map[i][j] == '0')
+					ft_error("Map must be surrounded by walls");
+				else if (ft_isin(map[i][j], "NSEW"))
+					ft_error("Player can't be outside the map");
+			}
+			j++;
 		}
+		i++;
 	}
-	return (0);
+}
+
+void	check_player(char **map)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_isin(map[i][j], "NSEW"))
+				count++;
+			j++;
+		}
+		i++;
+	}
+	if (count == 0)
+		ft_error("Map must have a player (N, S, E, W)");
+	if (count > 1)
+		ft_error("Map must have only one player");
 }

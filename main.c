@@ -1,32 +1,73 @@
 #include "Cupid.h"
-#include <stdio.h>
 
-void	ft_error(char *message)
+void	get_player_position(t_cube *cub, int *x, int *y)
 {
-	ft_putendl_fd("Error", STDERR_FILENO);
-	ft_putendl_fd(message, STDERR_FILENO);
-	exit(EXIT_FAILURE);
+	*y = 0;
+	while (cub->map.map[*y])
+	{
+		*x = 0;
+		while (cub->map.map[*y][*x])
+		{
+			if (ft_strchr("ENSW", cub->map.map[*y][*x]))
+			{
+				if (cub->map.map[*y][*x] == 'E')
+					cub->player.h_angle = 0.01;
+				else if (cub->map.map[*y][*x] == 'S')
+					cub->player.h_angle = (PI * 2) / 4;
+				else if (cub->map.map[*y][*x] == 'W')
+					cub->player.h_angle = PI;
+				else
+					cub->player.h_angle = ((PI * 2) / 4) * 3;
+				return ;
+			}
+			(*x)++;
+		}
+		(*y)++;
+	}
 }
 
-static int	valid_map_name(char *str)
+void	init_data(t_cube *cube)
 {
-	int	i;
+	int	x;
+	int	y;
 
-	i = ft_strlen(str) - 1;
-	if (str[i--] == 'b' && str[i--] == 'u' && str[i--] == 'c' && str[i] == '.')
-		return (1);
-	return (0);
+	x = 0;
+	y = 0;
+	get_player_position(cube, &x, &y);
+	cube->player.v_angle = 0;
+	cube->player.x = x * 64;
+	cube->player.y = y * 64;
+	cube->ray.x_dir = 0;
+	cube->ray.y_dir = 0;
+	cube->ray.x_dist = 0;
+	cube->ray.y_dist = 0;
+	cube->ray.x_step = 0;
+	cube->ray.y_step = 0;
+	cube->ray.x_side_dis = 0;
+	cube->ray.y_side_dis = 0;
+	cube->ray.curr_x = 0;
+	cube->ray.curr_y = 0;
+}
+
+void	init_mlx(t_cube *cube)
+{
+	cube->mlx = mlx_init();
+	if (!cube->mlx)
+		ft_exit(EXIT_FAILURE);
+	cube->win = mlx_new_window(cube->mlx, WIDTH, HEIGHT, TITLE);
+	if (!cube->win)
+		ft_exit(EXIT_FAILURE);
+	mlx_hook(cube->win, CLOSE_BUTTON, 0, close_window, cube);
 }
 
 int	main(int argc, char **argv)
 {
-	// if (argc != 2)
-	// 	ft_error("Invalid Argument: takes one argument");
-	// if (!valid_map_name(argv[1]))
-	// 	ft_error("Invalid map name: must end with .cub");
-	t_cub *cub;
-	
-	cub = create_map();
-	player_movement(cub);
+	t_cube	cube;
+
+	init_mlx(&cube);
+	parse(argc, argv, &cube);
+	render(&cube);
+	mlx_loop(cube.mlx);
+	ft_free();
 	return (EXIT_SUCCESS);
 }
