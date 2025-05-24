@@ -46,6 +46,8 @@ void	init_map(t_cube *cube)
 			&& ft_isallspace(current->next->content))
 			ft_error("Incorrect Map Structure: one or more empty lines");
 		check_characters(line);
+		if(!line)
+			ft_error("Element after Map");
 		cube->map.map[i++] = ft_strdup(line);
 		current = current->next;
 	}
