@@ -1,5 +1,15 @@
 #include "Cupid.h"
 
+void	pixel_put(t_texture *texture, int x, int y, int color)
+{
+	int	offset;
+
+	if (x < 0 || x > texture->width || y < 0 || y > texture->height)
+		return ;
+	offset = y * texture->size_line + x * (texture->bits_per_pixel / 8);
+	*(int *)(texture->addr + offset) = color;
+}
+
 void draw_line(t_cube *cub, int x, float dir)
 {
     int y;
@@ -11,7 +21,7 @@ void draw_line(t_cube *cub, int x, float dir)
     fix = fix_angle(cub->player.h_angle - dir);
     line_hight = (TILE_SIZE * HEIGHT) / (cub->ray.dist * cos(fix));
     while (y < (HEIGHT - line_hight) / 2)
-        mlx_pixel_put(cub->mlx, cub->win, x, y++, WHITE);
+        mlx_pixel_put(cub->mlx, cub->win, x, y++, cub->celling);
     if (line_hight > HEIGHT)
         line_hight = HEIGHT;
     while (line_hight-- > 0)
@@ -20,7 +30,7 @@ void draw_line(t_cube *cub, int x, float dir)
         y++;
     }
     while (y < HEIGHT)
-        mlx_pixel_put(cub->mlx, cub->win, x, y++, BLACK);
+        mlx_pixel_put(cub->mlx, cub->win, x, y++, cub->floor);
 }
 
 void render(t_cube *cub)

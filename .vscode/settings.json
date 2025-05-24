@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "cupid.h": "c"
-    }
+		"cupid.h": "c",
+		"fcntl.h": "c",
+		"unistd.h": "c",
+		"mlx_int.h": "c"
+	}
 }

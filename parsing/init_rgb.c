@@ -37,7 +37,7 @@ int	valid_number(char *str)
 	return (1);
 }
 
-void	init_rgb(char *str, t_rgb *rgb)
+void	init_rgb(char *str, unsigned int *rgb)
 {
 	char	**split;
 
@@ -51,7 +51,5 @@ void	init_rgb(char *str, t_rgb *rgb)
 		|| !valid_number(split[1])
 		|| !valid_number(split[2]))
 		ft_error("Invalid RGB value");
-	rgb->red = ft_atol(split[0]);
-	rgb->green = ft_atol(split[1]);
-	rgb->blue = ft_atol(split[2]);
+	*rgb = (ft_atol(split[0]) << 16) | (ft_atol(split[1]) << 8) | ft_atol(split[2]);
 }

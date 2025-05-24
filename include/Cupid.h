@@ -1,10 +1,10 @@
 #ifndef CUPID_H
 # define CUPID_H
 
+# include "../mlx/mlx.h"
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
-# include "../mlx/mlx.h"
 # include <stdio.h>
 # include <stdio.h> // to remove later
 # include <stdlib.h>
@@ -36,7 +36,6 @@
 # define PI 3.1415929
 # define FOV 1.047197633
 
-
 # define WIDTH 1300
 # define HEIGHT 700
 # define BLACK 0x000000
@@ -60,16 +59,13 @@ typedef struct s_gc
 
 }					t_gc;
 
-typedef struct s_rgb
-{
-	int				red;
-	int				green;
-	int				blue;
-}					t_rgb;
-
 typedef struct s_texture
 {
 	void			*texture;
+	char			*addr;
+	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
 	char			*name;
 	int				height;
 	int				width;
@@ -100,16 +96,16 @@ typedef struct s_ray
 
 typedef struct s_key
 {
-	int speed;
-	int esc;
-	int	w;
-	int	d;
-	int	s;
-	int	a;
-	int	up;
-	int	down;
-	int	right;
-	int	left;
+	int				speed;
+	int				esc;
+	int				w;
+	int				d;
+	int				s;
+	int				a;
+	int				up;
+	int				down;
+	int				right;
+	int				left;
 }					t_key;
 
 typedef struct s_player
@@ -139,13 +135,13 @@ typedef struct s_cube
 	t_texture		we;
 	t_texture		ea;
 
-	t_rgb			floor_rgb;
-	t_rgb			celling_rgb;
+	unsigned int	floor;
+	unsigned int	celling;
 
 }					t_cube;
 
 // parsing
-void				init_rgb(char *str, t_rgb *rgb);
+void				init_rgb(char *str, unsigned int *rgb);
 void				init_map(t_cube *cube);
 void				check_map(char **map);
 void				check_player(char **map);
@@ -159,9 +155,9 @@ float				fix_angle(float angle);
 void				ray_casting(t_cube *cube, float new_angle);
 int					detect_move(void *ptr);
 int					close_window(t_cube *cube);
-int 				player_movement(t_cube *cub);
-int 				pressed(int key, void *ptr);
-int 				released(int key, void *ptr);
+int					player_movement(t_cube *cub);
+int					pressed(int key, void *ptr);
+int					released(int key, void *ptr);
 // utils
 unsigned long long	ft_atol(const char *str);
 void				ft_error(char *message);

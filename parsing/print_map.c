@@ -31,13 +31,6 @@ void	print_elements(t_cube cube)
 		printf("C : [%s]\n", cube.c);
 }
 
-void	print_rgb(t_rgb rgb)
-{
-	printf("Red: [%d]\n", rgb.red);
-	printf("Green: [%d]\n", rgb.green);
-	printf("Blue: [%d]\n", rgb.blue);
-}
-
 void	print_map(char **map)
 {
 	int	i;

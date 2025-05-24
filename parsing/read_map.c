@@ -2,7 +2,6 @@
 
 void			print_lines(t_list *lines);
 void			print_elements(t_cube cube);
-void			print_rgb(t_rgb rgb);
 void			print_map(char **map);
 
 static int	valid_file_name(char *str)
@@ -48,12 +47,10 @@ void	parse(int argc, char **argv, t_cube *cube)
 	if (!cube->lines)
 		ft_error("Empty Map File");
 	init_elements(cube);
-	init_rgb(cube->f, &cube->floor_rgb);
-	init_rgb(cube->c, &cube->celling_rgb);
+	init_rgb(cube->f, &cube->floor);
+	init_rgb(cube->c, &cube->celling);
 	init_map(cube);
 	print_elements(*cube);
-	print_rgb(cube->floor_rgb);
-	print_rgb(cube->celling_rgb);
 	print_map(cube->map.map);
 	check_map(cube->map.map);
 	check_player(cube->map.map);
