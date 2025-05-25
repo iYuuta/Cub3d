@@ -1,7 +1,8 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3
+CFLAGS =
+CFLAGS = -g -fsanitize=address -Wall -Wextra -Werror
 RM = rm -f
 
 movements = movements/player_movement.c movements/events.c

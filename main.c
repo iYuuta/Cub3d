@@ -11,7 +11,7 @@ void	get_player_position(t_cube *cub, int *x, int *y)
 			if (ft_strchr("ENSW", cub->map.map[*y][*x]))
 			{
 				if (cub->map.map[*y][*x] == 'E')
-					cub->player.h_angle = 0.01;
+					cub->player.h_angle = 0.001;
 				else if (cub->map.map[*y][*x] == 'S')
 					cub->player.h_angle = (PI * 2) / 4;
 				else if (cub->map.map[*y][*x] == 'W')
@@ -35,8 +35,8 @@ void	init_data(t_cube *cube)
 	y = 0;
 	get_player_position(cube, &x, &y);
 	cube->player.v_angle = 0;
-	cube->player.x = x * 64;
-	cube->player.y = y * 64;
+	cube->player.x = (x * 64) + 32;
+	cube->player.y = (y * 64) + 32;
 	cube->ray.x_dir = 0;
 	cube->ray.y_dir = 0;
 	cube->ray.x_dist = 0;
@@ -66,7 +66,6 @@ int	main(int argc, char **argv)
 
 	init_mlx(&cube);
 	parse(argc, argv, &cube);
-	render(&cube);
 	mlx_loop(cube.mlx);
 	ft_free();
 	return (EXIT_SUCCESS);

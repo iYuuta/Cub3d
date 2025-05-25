@@ -25,27 +25,17 @@ int move_player(t_cube *cub, float new_x, float new_y)
     return (1);
 }
 
-float fix_angle(float angle)
-{
-    angle = fmod(angle, PI * 2);
-    if (angle < 0)
-        angle += PI * 2;
-    return (angle);
-}
-
 int check_angle(t_cube *cub)
 {
-    if (cub->key.up == 1 && cub->player.v_angle > ((PI / 4) * -1))
-        cub->player.v_angle -= 0.04;
+    // if (cub->key.up == 1 && cub->player.v_angle > ((PI / 4) * -1))
+    //     cub->player.v_angle -= 0.04;
     if (cub->key.left == 1)
         cub->player.h_angle -= 0.04;
-    if (cub->key.down == 1 && cub->player.v_angle < (PI / 4))
-        cub->player.v_angle += 0.04;
+    // if (cub->key.down == 1 && cub->player.v_angle < (PI / 4))
+    //     cub->player.v_angle += 0.04;
     if (cub->key.right == 1)
         cub->player.h_angle += 0.04;
-    else
-        return (0);
-    if (cub->player.h_angle <= (2 * PI) * -1 || cub->player.h_angle >= 2 * PI)
+    if (cub->player.h_angle < 0 || cub->player.h_angle > 2 * PI)
         cub->player.h_angle = fix_angle(cub->player.h_angle);
     return (1);
 }
@@ -62,8 +52,7 @@ int detect_move(void *ptr)
         cub->key.speed = 2;
     x = cos(cub->player.h_angle) * cub->key.speed;
     y = sin(cub->player.h_angle) * cub->key.speed;
-    if (check_angle(cub))
-        return (render(cub), 0);
+    check_angle(cub);
     if (cub->key.esc)
         close_window(cub);
     if (cub->key.w == 1)

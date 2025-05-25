@@ -1,48 +1,75 @@
 #include "Cupid.h"
 
-void	pixel_put(t_texture *texture, int x, int y, int color)
+float fix_angle(float angle)
 {
-	int	offset;
-
-	if (x < 0 || x > texture->width || y < 0 || y > texture->height)
-		return ;
-	offset = y * texture->size_line + x * (texture->bits_per_pixel / 8);
-	*(int *)(texture->addr + offset) = color;
+    angle = fmod(angle, 2 * PI);
+    if (angle < 0)
+        angle += 2 * PI;
+    return angle;
 }
 
-int	get_pixel(t_texture texture, int x, int y)
+int get_pixel_color(t_texture texture, int x, int y)
 {
-	int	offset;
+	int offset;
 
-	x = x % 64;
-	y = y % 64;
-	if (x < 0 || x > texture.width || y < 0 || y > texture.height)
+	x %= 64;
+	y %= 64;
+	if (x < 0 || x >= 64 || y < 0 || y >= 64)
 		return (0);
+
 	offset = y * texture.size_line + x * (texture.bits_per_pixel / 8);
 	return (*(int *)(texture.addr + offset));
 }
 
+void	pixel_put(t_cube *cub, int x, int y, int color)
+{
+	int	offset;
+
+	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+		return ;
+	offset = y * cub->image.size_line + x * (cub->image.bits_per_pixel / 8);
+	*(int *)(cub->image.addr + offset) = color;
+}
+
+void draw_pixel(t_cube *cub, int x, int y)
+{
+    int color;
+
+    if (cub->column.wall == NORTH)
+       color = get_pixel_color(cub->no, cub->column.tex_pos, y);
+    else if (cub->column.wall == SOUTH)
+       color = get_pixel_color(cub->so, cub->column.tex_pos, y);
+    else if (cub->column.wall == EAST)
+       color = get_pixel_color(cub->ea, cub->column.tex_pos, y);
+    else
+       color = get_pixel_color(cub->we, cub->column.tex_pos, y);
+    pixel_put(cub, x, y, color);
+}
+
 void draw_line(t_cube *cub, int x, float dir)
 {
-    int y;
-    float line_height;
-    float fix;
+    int		y;
+	int		offset;
+    float	line_hight;
+    float	projection_fix;
 
     y = 0;
     ray_casting(cub, dir);
-    fix = fix_angle(cub->player.h_angle - dir);
-    line_height = (TILE_SIZE * HEIGHT) / (cub->ray.dist * cos(fix));
-    while (y < (HEIGHT - line_height) / 2)
-        mlx_pixel_put(cub->mlx, cub->win, x, y++, cub->celling);
-    if (line_height > HEIGHT)
-        line_height = HEIGHT;
-    while (line_height-- > 0)
+	offset = (HEIGHT / 2) - (cub->player.v_angle * (HEIGHT / 2));
+    projection_fix = (WIDTH / 2) / tan(FOV / 2);
+    line_hight = (TILE_SIZE * projection_fix)
+    / (cub->ray.dist * cos(fix_angle(cub->player.h_angle - dir)));
+    if (line_hight > HEIGHT)
+        line_hight = HEIGHT;
+    while (y < offset - line_hight / 2)
+        pixel_put(cub, x, y++, cub->celling);
+    while (line_hight-- > 0)
     {
-        mlx_pixel_put(cub->mlx, cub->win, x, y, get_pixel(cub->no, x, ((y - (HEIGHT / 2.0f) - (line_height / 2.0f)) / (line_height)) * cub->no.height));
+        draw_pixel(cub, x, y);
         y++;
     }
     while (y < HEIGHT)
-        mlx_pixel_put(cub->mlx, cub->win, x, y++, cub->floor);
+        pixel_put(cub, x, y++, cub->floor);
 }
 
 void render(t_cube *cub)
@@ -53,6 +80,13 @@ void render(t_cube *cub)
 
     fov = 60 * (PI / 180);
     dir = cub->player.h_angle - (fov / 2);
+    cub->image.texture = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+    if (!cub->image.texture)
+        exit(1); //free sum stuff
+    cub->image.addr = mlx_get_data_addr(cub->image.texture,
+        &(cub->image.bits_per_pixel), &(cub->image.size_line), &(cub->image.endian));
+    if (!cub->image.addr)
+        exit(1); //free sum stuff
     x = 0;
     while (x < WIDTH)
     {    
@@ -60,4 +94,6 @@ void render(t_cube *cub)
         dir += fov / WIDTH;
         x++;
     }
+    mlx_put_image_to_window(cub->mlx, cub->win, cub->image.texture, 0, 0);
+    mlx_destroy_image(cub->mlx, cub->image.texture);
 }

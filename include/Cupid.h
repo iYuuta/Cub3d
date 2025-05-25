@@ -15,8 +15,8 @@
 # endif
 
 # define TITLE "cub3D"
-# define HEIGHT 700
-# define WIDTH 1300
+# define HEIGHT 720
+# define WIDTH 1280
 
 # define ESC 65307
 
@@ -36,13 +36,12 @@
 # define PI 3.1415929
 # define FOV 1.047197633
 
-# define WIDTH 1300
-# define HEIGHT 700
-# define BLACK 0x000000
-# define WHITE 0xFFFFFF
-# define RED 0xFF0000
-# define GREEN 0x00FF00
-# define BLUE 0x0000FF
+
+# define NORTH 1
+# define SOUTH 2
+# define EAST 3
+# define WEST 4
+
 
 typedef struct s_list
 {
@@ -77,6 +76,16 @@ typedef struct s_map
 	char			**map;
 	int				length;
 }					t_map;
+
+typedef struct s_column
+{
+	float			tex_pos;
+	int				tex_y;
+	int				wall;
+	int				start;
+	int				end;
+	float			pixel_step;
+}					t_column;
 
 typedef struct s_ray
 {
@@ -122,10 +131,12 @@ typedef struct s_cube
 	void			*win;
 
 	t_list			*lines;
+	t_texture		image;
 	char			*f;
 	char			*c;
 
 	t_ray			ray;
+	t_column		column;
 	t_map			map;
 	t_key			key;
 	t_player		player;
