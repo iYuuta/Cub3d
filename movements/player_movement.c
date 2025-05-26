@@ -64,11 +64,62 @@ int detect_move(void *ptr)
     return (0);
 }
 
+int	mouse_move(int x, int y, t_cube *cub)
+{
+    int delta_x;
+    int delta_y;
+
+    if (!cub->mouse_drag)
+    {
+        cub->mouse_prev_x = x;
+        cub->mouse_prev_y = y;
+        return (0);
+    }
+
+    delta_x = x - cub->mouse_prev_x;
+    delta_y = y - cub->mouse_prev_y;
+    cub->mouse_prev_x = x;
+    cub->mouse_prev_y = y;
+    cub->player.h_angle += delta_x * 0.01;
+    cub->player.v_angle += delta_y * 0.5;
+    if (cub->player.v_angle > 720)
+        cub->player.v_angle = 720;
+    if (cub->player.v_angle < 0)
+        cub->player.v_angle = 0;
+    detect_move(cub);
+    return (0);
+}
+
+int mouse_press(int button, int x, int y, t_cube *cub)
+{
+    (void)x;
+    (void)y;
+
+    if (button == 1)
+        cub->mouse_drag = 1;
+
+    return (0);
+}
+
+int mouse_release(int button, int x, int y, t_cube *cub)
+{
+    (void)x;
+    (void)y;
+
+    if (button == 1)
+        cub->mouse_drag = 0;
+
+    return (0);
+}
+
 int player_movement(t_cube *cub)
 {
     render(cub);
     mlx_hook(cub->win, 2, 1L << 0, pressed, cub);
     mlx_hook(cub->win, 3, 1L << 1, released, cub);
+    mlx_hook(cub->win, 4, 1L << 2, mouse_press, cub);
+    mlx_hook(cub->win, 5, 1L << 3, mouse_release, cub);
+    mlx_hook(cub->win, 6, 1L << 6, mouse_move, cub);
     mlx_loop_hook(cub->mlx, detect_move, cub);
     mlx_loop(cub->mlx);
     return (0);

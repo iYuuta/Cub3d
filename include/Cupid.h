@@ -130,6 +130,10 @@ typedef struct s_cube
 	void			*mlx;
 	void			*win;
 
+	int 			mouse_prev_x;
+	int				mouse_prev_y;
+	int 			mouse_drag;
+	
 	t_list			*lines;
 	t_texture		image;
 	char			*f;
@@ -167,6 +171,7 @@ void				ray_casting(t_cube *cube, float new_angle);
 int					detect_move(void *ptr);
 int					close_window(t_cube *cube);
 int					player_movement(t_cube *cub);
+int					mouse_move(int x, int y, t_cube *cube);
 int					pressed(int key, void *ptr);
 int					released(int key, void *ptr);
 // utils
