@@ -35,8 +35,8 @@ void	init_data(t_cube *cube)
 	y = 0;
 	get_player_position(cube, &x, &y);
 	cube->player.v_angle = HEIGHT / 2;
-	cube->player.x = (x * 64) + 32;
-	cube->player.y = (y * 64) + 32;
+	cube->player.x = (x * TILE_SIZE) + 32;
+	cube->player.y = (y * TILE_SIZE) + 32;
 	cube->ray.x_dir = 0;
 	cube->ray.y_dir = 0;
 	cube->ray.x_dist = 0;

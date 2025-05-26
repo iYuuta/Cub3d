@@ -78,13 +78,13 @@ typedef struct s_map
 
 typedef struct s_column
 {
-	float			tex_pos;
-	int				tex_y;
-	int				wall;
-	int				start;
-	int				end;
-	int				length;
-	float			pixel_step;
+	int				tex_x; // x coordinats of where the ray hit
+	float			tex_y; // current y coordinats in the texture
+	int				wall; // which wall the ray hit
+	float			start; // start of the column
+	float			end; //end of the column
+	float			length; // length of the column
+	float			pixel_step; // how many steps u increment each time in the texture y
 }					t_column;
 
 typedef struct s_ray
