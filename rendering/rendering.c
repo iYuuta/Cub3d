@@ -31,46 +31,72 @@ void	pixel_put(t_cube *cub, int x, int y, int color)
 	*(int *)(cub->image.addr + offset) = color;
 }
 
-void draw_pixel(t_cube *cub, int x, int y)
+void draw_pixel(t_cube *cub, int x, int y, int texture_y)
 {
     int color;
 
     if (cub->column.wall == NORTH)
-       color = get_pixel_color(cub->no, cub->column.tex_pos, y);
+        color = get_pixel_color(cub->no, cub->column.tex_pos, texture_y);
     else if (cub->column.wall == SOUTH)
-       color = get_pixel_color(cub->so, cub->column.tex_pos, y);
+        color = get_pixel_color(cub->so, cub->column.tex_pos, texture_y);
     else if (cub->column.wall == EAST)
-       color = get_pixel_color(cub->ea, cub->column.tex_pos, y);
+        color = get_pixel_color(cub->ea, cub->column.tex_pos, texture_y);
     else
-       color = get_pixel_color(cub->we, cub->column.tex_pos, y);
+        color = get_pixel_color(cub->we, cub->column.tex_pos, texture_y);
     pixel_put(cub, x, y, color);
 }
 
 void draw_line(t_cube *cub, int x, float dir)
 {
-    int		y;
-	int		offset;
-    float	line_hight;
-    float	projection_fix;
+    int y;
+    int offset;
+    float line_height;
+    float projection_fix;
+    float wall_top;
+    float wall_bottom;
+    float tex_step;
+    float tex_pos;
+    int texture_y;
 
-    y = 0;
     ray_casting(cub, dir);
-	offset = (HEIGHT / 2) - (cub->player.v_angle * (HEIGHT / 2));
+
     projection_fix = (WIDTH / 2) / tan(FOV / 2);
-    line_hight = (TILE_SIZE * projection_fix)
-    / (cub->ray.dist * cos(fix_angle(cub->player.h_angle - dir)));
-    if (line_hight > HEIGHT)
-        line_hight = HEIGHT;
-    while (y < offset - line_hight / 2)
+    line_height = (TILE_SIZE * projection_fix) / 
+                  (cub->ray.dist * cos(fix_angle(cub->player.h_angle - dir)));
+
+    if (line_height > HEIGHT)
+        line_height = HEIGHT;
+
+    offset = (HEIGHT / 2) - (cub->player.v_angle * (HEIGHT / 2));
+    wall_top = offset - line_height / 2;
+    wall_bottom = wall_top + line_height;
+
+    // Ceiling
+    y = 0;
+    while (y < wall_top)
         pixel_put(cub, x, y++, cub->celling);
-    while (line_hight-- > 0)
-    {
-        draw_pixel(cub, x, y);
+
+    // Texture stepping
+    tex_step = (float)64 / line_height;
+    tex_pos = 0;
+    if (wall_top < 0) {
+        tex_pos = -wall_top * tex_step;
+        wall_top = 0;
+    }
+
+    // Wall
+    while (y < wall_bottom && y < HEIGHT) {
+        texture_y = (int)tex_pos & (64 - 1);
+        draw_pixel(cub, x, y, texture_y);
+        tex_pos += tex_step;
         y++;
     }
+
+    // Floor
     while (y < HEIGHT)
         pixel_put(cub, x, y++, cub->floor);
 }
+
 
 void render(t_cube *cub)
 {
