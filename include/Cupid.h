@@ -36,7 +36,6 @@
 # define PI 3.1415929
 # define FOV 1.047197633
 
-
 # define NORTH 1
 # define SOUTH 2
 # define EAST 3
@@ -84,6 +83,7 @@ typedef struct s_column
 	int				wall;
 	int				start;
 	int				end;
+	int				length;
 	float			pixel_step;
 }					t_column;
 
@@ -122,7 +122,7 @@ typedef struct s_player
 	float			y;
 	float			x;
 	float			h_angle;
-	float			v_angle;
+	int				v_angle;
 }					t_player;
 
 typedef struct s_cube

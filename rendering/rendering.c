@@ -16,7 +16,6 @@ int get_pixel_color(t_texture texture, int x, int y)
 	y %= 64;
 	if (x < 0 || x >= 64 || y < 0 || y >= 64)
 		return (0);
-
 	offset = y * texture.size_line + x * (texture.bits_per_pixel / 8);
 	return (*(int *)(texture.addr + offset));
 }
@@ -31,79 +30,60 @@ void	pixel_put(t_cube *cub, int x, int y, int color)
 	*(int *)(cub->image.addr + offset) = color;
 }
 
-void draw_pixel(t_cube *cub, int x, int y, int texture_y)
+void draw_pixel(t_cube *cub, int x, int y)
 {
     int color;
 
     if (cub->column.wall == NORTH)
-        color = get_pixel_color(cub->no, cub->column.tex_pos, texture_y);
+       color = get_pixel_color(cub->no, cub->column.tex_pos, y);
     else if (cub->column.wall == SOUTH)
-        color = get_pixel_color(cub->so, cub->column.tex_pos, texture_y);
+       color = get_pixel_color(cub->so, cub->column.tex_pos, y);
     else if (cub->column.wall == EAST)
-        color = get_pixel_color(cub->ea, cub->column.tex_pos, texture_y);
+       color = get_pixel_color(cub->ea, cub->column.tex_pos, y);
     else
-        color = get_pixel_color(cub->we, cub->column.tex_pos, texture_y);
+       color = get_pixel_color(cub->we, cub->column.tex_pos, y);
     pixel_put(cub, x, y, color);
+}
+
+void calculate_column_info(t_cube *cub, float dir)
+{
+    float	projection_fix;
+
+    ray_casting(cub, dir);
+    projection_fix = (WIDTH / 2) / tan(FOV / 2);
+    cub->column.length = (TILE_SIZE * projection_fix)
+    / (cub->ray.dist * cos(fix_angle(cub->player.h_angle - dir)));
+    cub->column.start = cub->player.v_angle - (cub->column.length / 2);
+    cub->column.end = cub->column.start + cub->column.length;
+    if (cub->column.start < 0)
+        cub->column.start = 0;
+    if (cub->column.end > HEIGHT)
+        cub->column.end = HEIGHT;
 }
 
 void draw_line(t_cube *cub, int x, float dir)
 {
-    int y;
-    int offset;
-    float line_height;
-    float projection_fix;
-    float wall_top;
-    float wall_bottom;
-    float tex_step;
-    float tex_pos;
-    int texture_y;
+    int		y;
 
-    ray_casting(cub, dir);
-
-    projection_fix = (WIDTH / 2) / tan(FOV / 2);
-    line_height = (TILE_SIZE * projection_fix) / 
-                  (cub->ray.dist * cos(fix_angle(cub->player.h_angle - dir)));
-
-    if (line_height > HEIGHT)
-        line_height = HEIGHT;
-
-    offset = (HEIGHT / 2) - (cub->player.v_angle * (HEIGHT / 2));
-    wall_top = offset - line_height / 2;
-    wall_bottom = wall_top + line_height;
-
-    // Ceiling
     y = 0;
-    while (y < wall_top)
+    ray_casting(cub, dir);
+    calculate_column_info(cub, dir);
+    while (y < cub->column.start)
         pixel_put(cub, x, y++, cub->celling);
-
-    // Texture stepping
-    tex_step = (float)64 / line_height;
-    tex_pos = 0;
-    if (wall_top < 0) {
-        tex_pos = -wall_top * tex_step;
-        wall_top = 0;
-    }
-
-    // Wall
-    while (y < wall_bottom && y < HEIGHT) {
-        texture_y = (int)tex_pos & (64 - 1);
-        draw_pixel(cub, x, y, texture_y);
-        tex_pos += tex_step;
+    while (y < cub->column.end)
+    {
+        draw_pixel(cub, x, y);
         y++;
     }
-
-    // Floor
     while (y < HEIGHT)
         pixel_put(cub, x, y++, cub->floor);
 }
-
 
 void render(t_cube *cub)
 {
     int x;
     float dir;
     float fov;
-
     fov = 60 * (PI / 180);
     dir = cub->player.h_angle - (fov / 2);
     cub->image.texture = mlx_new_image(cub->mlx, WIDTH, HEIGHT);

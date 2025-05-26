@@ -18,22 +18,21 @@ void get_direction(t_cube *cub)
     {
         cub->ray.dist = cub->ray.y_side_dis - cub->ray.y_dist;
         wall_x = cub->player.x + cub->ray.dist * cub->ray.x_dir;
-        if (cub->ray.y_dir > 0 && cub->ray.y_dir < PI)
+        if (cub->ray.y_dir < 0)
             cub->column.wall = NORTH;
         else
             cub->column.wall = SOUTH;
     }
     else
     {
+        cub->ray.dist = cub->ray.x_side_dis - cub->ray.x_dist;
         wall_x = cub->player.y + cub->ray.dist * cub->ray.y_dir;
-        if (cub->ray.x_dir > (PI * 2) / 4 && cub->ray.x_dir < PI + (PI / 2))
+        if (cub->ray.x_dir < 0)
             cub->column.wall = WEST;
         else
             cub->column.wall = EAST;
     }
     wall_x = fmod(wall_x, TILE_SIZE);
-    if (wall_x < 0)
-        wall_x += TILE_SIZE;
     cub->column.tex_pos = (int)(wall_x * (64 / (float)TILE_SIZE));
 }
 

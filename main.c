@@ -13,11 +13,11 @@ void	get_player_position(t_cube *cub, int *x, int *y)
 				if (cub->map.map[*y][*x] == 'E')
 					cub->player.h_angle = 0.001;
 				else if (cub->map.map[*y][*x] == 'S')
-					cub->player.h_angle = (PI * 2) / 4;
+					cub->player.h_angle = PI / 2;
 				else if (cub->map.map[*y][*x] == 'W')
 					cub->player.h_angle = PI;
 				else
-					cub->player.h_angle = ((PI * 2) / 4) * 3;
+					cub->player.h_angle = (PI / 2) * 3;
 				return ;
 			}
 			(*x)++;
@@ -34,7 +34,7 @@ void	init_data(t_cube *cube)
 	x = 0;
 	y = 0;
 	get_player_position(cube, &x, &y);
-	cube->player.v_angle = 0;
+	cube->player.v_angle = HEIGHT / 2;
 	cube->player.x = (x * 64) + 32;
 	cube->player.y = (y * 64) + 32;
 	cube->ray.x_dir = 0;

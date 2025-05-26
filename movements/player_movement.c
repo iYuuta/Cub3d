@@ -1,38 +1,35 @@
 #include "Cupid.h"
 
-int is_move_valid(t_map *map, float tile_x, float tile_y)
+void move_player(t_cube *cub, float new_x, float new_y)
 {
     int x;
     int y;
+    int old_x;
+    int old_y;
 
-    x = (int)(tile_x / TILE_SIZE);
-    y = (int)(tile_y / TILE_SIZE);
-    if (y < 0 || y >= map->length)
-        return (0);
-    if (x < 0 || x >= (int)ft_strlen(map->map[y]))
-        return (0);
-    if (ft_strchr("1 ", map->map[y][x]))
-        return (0);
-    return (1);
-}
-
-int move_player(t_cube *cub, float new_x, float new_y)
-{
-    if (!is_move_valid(&(cub->map), new_x, new_y))
-        return (0);
-    cub->player.x = new_x;
-    cub->player.y = new_y;
-    return (1);
+    x = (int)(new_x / TILE_SIZE);
+    y = (int)(new_y / TILE_SIZE);
+    old_x = (int)(cub->player.x / TILE_SIZE);
+    old_y = (int)(cub->player.y / TILE_SIZE);
+    if (y < 0 || y >= cub->map.length)
+        return ;
+    if (x < 0 || x >= (int)ft_strlen(cub->map.map[y]))
+        return ;
+    if (!ft_strchr("1 ", cub->map.map[old_y][x]))
+        cub->player.x = new_x;
+    if (!ft_strchr("1 ", cub->map.map[y][old_x]))
+        cub->player.y = new_y;
+    return ;
 }
 
 int check_angle(t_cube *cub)
 {
-    // if (cub->key.up == 1 && cub->player.v_angle > ((PI / 4) * -1))
-    //     cub->player.v_angle -= 0.04;
+    if (cub->key.up == 1 && cub->player.v_angle < 720)
+        cub->player.v_angle += 6;
     if (cub->key.left == 1)
         cub->player.h_angle -= 0.04;
-    // if (cub->key.down == 1 && cub->player.v_angle < (PI / 4))
-    //     cub->player.v_angle += 0.04;
+    if (cub->key.down == 1 && cub->player.v_angle > 0)
+        cub->player.v_angle -= 6;
     if (cub->key.right == 1)
         cub->player.h_angle += 0.04;
     if (cub->player.h_angle < 0 || cub->player.h_angle > 2 * PI)
