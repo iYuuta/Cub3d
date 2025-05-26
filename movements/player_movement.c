@@ -63,32 +63,35 @@ int detect_move(void *ptr)
     render(cub);
     return (0);
 }
-
 int	mouse_move(int x, int y, t_cube *cub)
 {
-    int delta_x;
-    int delta_y;
+	int delta_x;
+	int delta_y;
 
-    if (!cub->mouse_drag)
-    {
-        cub->mouse_prev_x = x;
-        cub->mouse_prev_y = y;
-        return (0);
-    }
-
-    delta_x = x - cub->mouse_prev_x;
-    delta_y = y - cub->mouse_prev_y;
-    cub->mouse_prev_x = x;
-    cub->mouse_prev_y = y;
-    cub->player.h_angle += delta_x * 0.01;
-    cub->player.v_angle += delta_y * 0.5;
-    if (cub->player.v_angle > 720)
-        cub->player.v_angle = 720;
-    if (cub->player.v_angle < 0)
-        cub->player.v_angle = 0;
-    detect_move(cub);
-    return (0);
+	if (!cub->mouse_drag)
+	{
+		cub->mouse_prev_x = x;
+		cub->mouse_prev_y = y;
+		return (0);
+	}
+	delta_x = x - cub->mouse_prev_x;
+	delta_y = y - cub->mouse_prev_y;
+	cub->mouse_prev_x = x;
+	cub->mouse_prev_y = y;
+	if (delta_y < 0 && cub->player.v_angle < 720)
+		cub->player.v_angle += 8;
+	else if (delta_y > 0 && cub->player.v_angle > 0)
+		cub->player.v_angle -= 8;
+	if (delta_x < 0)
+		cub->player.h_angle -= 0.04;
+	else if (delta_x > 0)
+		cub->player.h_angle += 0.04;
+	if (cub->player.h_angle < 0 || cub->player.h_angle > 2 * PI)
+		cub->player.h_angle = fix_angle(cub->player.h_angle);
+	detect_move(cub);
+	return (0);
 }
+
 
 int mouse_press(int button, int x, int y, t_cube *cub)
 {
@@ -97,7 +100,6 @@ int mouse_press(int button, int x, int y, t_cube *cub)
 
     if (button == 1)
         cub->mouse_drag = 1;
-
     return (0);
 }
 
