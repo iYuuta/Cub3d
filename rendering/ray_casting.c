@@ -11,14 +11,13 @@ int is_out_of_bound(t_map *map, int x, int y)
 
 void get_direction(t_cube *cub)
 {
-    cub->ray.dist = cub->ray.x_side_dis - cub->ray.x_dist;
     float wall_x;
-
-    wall_x = 0;
+    
+    cub->ray.dist = cub->ray.x_side_dis - cub->ray.x_dist;
     if (cub->ray.side == 1)
     {
         cub->ray.dist = cub->ray.y_side_dis - cub->ray.y_dist;
-        wall_x = cub->player.y + cub->ray.dist * cub->ray.y_dir;
+        wall_x = cub->player.x + cub->ray.dist * cub->ray.x_dir;
         if (cub->ray.y_dir < 0)
             cub->column.wall = NORTH;
         else
@@ -26,17 +25,16 @@ void get_direction(t_cube *cub)
     }
     else
     {
-        cub->ray.dist = cub->ray.x_side_dis - cub->ray.x_dist;
-        wall_x = cub->player.x + cub->ray.dist * cub->ray.x_dir;
+        wall_x = cub->player.y + cub->ray.dist * cub->ray.y_dir;
         if (cub->ray.x_dir < 0)
             cub->column.wall = WEST;
         else
             cub->column.wall = EAST;
     }
-    wall_x -= floor(wall_x);
-    cub->column.tex_x = (int)(wall_x * 64);
-    if ((cub->ray.side == 0 && cub->ray.x_dir > 0) || (cub->ray.side == 1 && cub->ray.y_dir < 0))
-        cub->column.tex_x = 64 - cub->column.tex_x - 1;
+    wall_x = fmod(wall_x, TILE_SIZE);
+    if (wall_x < 0)
+        wall_x += TILE_SIZE;
+    cub->column.tex_x = (int)(wall_x * (64 / (float)TILE_SIZE));
 }
 
 void math_init(t_cube *cub, float new_angle)

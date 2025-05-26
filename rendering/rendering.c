@@ -39,32 +39,36 @@ void calculate_column_info(t_cube *cub, float dir)
         / (cub->ray.dist * cos(fix_angle(cub->player.h_angle - dir)));
     cub->column.start = cub->player.v_angle - (cub->column.length / 2);
     cub->column.end = cub->column.start + cub->column.length;
+    cub->column.tex_y = 0;
     if (cub->column.start < 0)
+    {
+        cub->column.tex_y = (-cub->column.start) * cub->column.pixel_step;
         cub->column.start = 0;
+    }
     if (cub->column.end > HEIGHT)
         cub->column.end = HEIGHT;
     cub->column.pixel_step = (float)64 / cub->column.length;
-    cub->column.tex_y = 0;
 }
 
-void draw_pixel(t_cube *cub, int x, int y)
+void draw_pixel(t_cube *cub, int x, int y, int tex_y)
 {
     int color;
 
     if (cub->column.wall == NORTH)
-       color = get_pixel_color(cub->no, cub->column.tex_x, (int)cub->column.tex_y);
+       color = get_pixel_color(cub->no, cub->column.tex_x, tex_y);
     else if (cub->column.wall == SOUTH)
-       color = get_pixel_color(cub->so, cub->column.tex_x, (int)cub->column.tex_y);
+       color = get_pixel_color(cub->so, cub->column.tex_x, tex_y);
     else if (cub->column.wall == EAST)
-       color = get_pixel_color(cub->ea, cub->column.tex_x, (int)cub->column.tex_y);
+       color = get_pixel_color(cub->ea, cub->column.tex_x, tex_y);
     else
-       color = get_pixel_color(cub->we, cub->column.tex_x, (int)cub->column.tex_y);
+       color = get_pixel_color(cub->we, cub->column.tex_x, tex_y);
     pixel_put(cub, x, y, color);
 }
 
 void draw_line(t_cube *cub, int x, float dir)
 {
     int		y;
+    int     tex_y;
 
     y = 0;
     ray_casting(cub, dir);
@@ -73,7 +77,8 @@ void draw_line(t_cube *cub, int x, float dir)
         pixel_put(cub, x, y++, cub->celling);
     while (y < cub->column.end)
     {
-        draw_pixel(cub, x, y);
+        tex_y = (int)cub->column.tex_y & (64 - 1);
+        draw_pixel(cub, x, y, tex_y);
         cub->column.tex_y += cub->column.pixel_step;
         y++;
     }

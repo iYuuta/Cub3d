@@ -24,12 +24,12 @@ void move_player(t_cube *cub, float new_x, float new_y)
 
 int check_angle(t_cube *cub)
 {
-    if (cub->key.up == 1 && cub->player.v_angle < 480)
-        cub->player.v_angle += 6;
+    if (cub->key.up == 1 && cub->player.v_angle < 720)
+        cub->player.v_angle += 8;
     if (cub->key.left == 1)
         cub->player.h_angle -= 0.04;
-    if (cub->key.down == 1 && cub->player.v_angle > 160)
-        cub->player.v_angle -= 6;
+    if (cub->key.down == 1 && cub->player.v_angle > 0)
+        cub->player.v_angle -= 8;
     if (cub->key.right == 1)
         cub->player.h_angle += 0.04;
     if (cub->player.h_angle < 0 || cub->player.h_angle > 2 * PI)
