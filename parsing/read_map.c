@@ -48,7 +48,7 @@ void	parse(int argc, char **argv, t_cube *cube)
 		ft_error("Empty Map File");
 	init_elements(cube);
 	init_rgb(cube->f, &cube->floor);
-	init_rgb(cube->c, &cube->celling);
+	init_rgb(cube->c, &cube->ceiling);
 	init_map(cube);
 	print_elements(*cube);
 	print_map(cube->map.map);

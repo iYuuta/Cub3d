@@ -22,7 +22,7 @@ static void	check_characters(char *line)
 		return ;
 	while (*line)
 	{
-		if (!ft_isin(*line, "10NSEW") && !ft_isspace(*line))
+		if (!ft_isin(*line, "10NSEWD") && !ft_isspace(*line))
 			ft_error("Invalid Map Character");
 		if (*line == 9)
 			ft_error("Map should not contain tabs");
@@ -46,7 +46,7 @@ void	init_map(t_cube *cube)
 			&& ft_isallspace(current->next->content))
 			ft_error("Incorrect Map Structure: one or more empty lines");
 		check_characters(line);
-		if(!line)
+		if (!line)
 			ft_error("Element after Map");
 		cube->map.map[i++] = ft_strdup(line);
 		current = current->next;

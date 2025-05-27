@@ -6,15 +6,16 @@ int	close_window(t_cube *cube)
 	mlx_destroy_image(cube->mlx, cube->so.texture);
 	mlx_destroy_image(cube->mlx, cube->we.texture);
 	mlx_destroy_image(cube->mlx, cube->ea.texture);
+	mlx_destroy_image(cube->mlx, cube->image.texture);
 	mlx_destroy_window(cube->mlx, cube->win);
 	mlx_destroy_display(cube->mlx);
 	ft_exit(EXIT_SUCCESS);
 	return (0);
 }
 
-int pressed(int key, void *ptr)
+int	pressed(int key, void *ptr)
 {
-	t_cube *cub;
+	t_cube	*cub;
 
 	cub = (t_cube *)ptr;
 	if (key == ESC)
@@ -35,12 +36,14 @@ int pressed(int key, void *ptr)
 		cub->key.left = 1;
 	else if (key == RIGHT)
 		cub->key.right = 1;
+	else if (key == SPACE)
+		cub->key.door_status += 1;
 	return (0);
 }
 
-int released(int key, void *ptr)
+int	released(int key, void *ptr)
 {
-	t_cube *cub;
+	t_cube	*cub;
 
 	cub = (t_cube *)ptr;
 	if (key == W)
@@ -59,5 +62,7 @@ int released(int key, void *ptr)
 		cub->key.left = 0;
 	else if (key == RIGHT)
 		cub->key.right = 0;
+	else if (key == SPACE)
+		cub->key.door_status = 0;
 	return (0);
 }

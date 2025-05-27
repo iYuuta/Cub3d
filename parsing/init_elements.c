@@ -35,7 +35,7 @@ static int	add_element(char *str, t_cube *cube)
 		return (dup[4]++, str++, cube->f = get_value(str), 1);
 	else if (!ft_strncmp(str, "C", 1))
 		return (dup[5]++, str++, cube->c = get_value(str), 1);
-	else if (*str && !ft_isin(*str, "01NSEW"))
+	else if (*str && !ft_isin(*str, "01NSEWD"))
 		ft_error("Invalid Map Character");
 	return (0);
 }
@@ -74,6 +74,14 @@ static void	init_texture(t_cube *cube)
 			&cube->ea.bits_per_pixel,
 			&cube->ea.size_line,
 			&cube->ea.endian);
+	cube->door.texture = mlx_xpm_file_to_image(cube->mlx, "textures/closed_door.xpm",
+			&cube->door.height, &cube->door.width);
+	if (!cube->door.texture)
+		ft_error("Failed to load the door texture file");
+	cube->door.addr = mlx_get_data_addr(cube->door.texture,
+			&cube->door.bits_per_pixel,
+			&cube->door.size_line,
+			&cube->door.endian);
 }
 
 void	init_elements(t_cube *cube)

@@ -57,6 +57,14 @@ void	init_mlx(t_cube *cube)
 	cube->win = mlx_new_window(cube->mlx, WIDTH, HEIGHT, TITLE);
 	if (!cube->win)
 		ft_exit(EXIT_FAILURE);
+	cube->image.texture = mlx_new_image(cube->mlx, WIDTH, HEIGHT);
+    if (!cube->image.texture)
+        exit(1); //free sum stuff
+    cube->image.addr = mlx_get_data_addr(cube->image.texture,
+        &(cube->image.bits_per_pixel), &(cube->image.size_line), &(cube->image.endian));
+    if (!cube->image.addr)
+        exit(1); //free sum stuff
+	cube->key.door_status = 0;
 	mlx_hook(cube->win, CLOSE_BUTTON, 0, close_window, cube);
 }
 

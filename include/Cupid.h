@@ -3,6 +3,7 @@
 
 # include "../mlx/mlx.h"
 # include <fcntl.h>
+# include <sys/time.h>
 # include <limits.h>
 # include <math.h>
 # include <stdio.h>
@@ -19,7 +20,7 @@
 # define WIDTH 1280
 
 # define ESC 65307
-
+# define SPACE 32
 # define CLOSE_BUTTON 17
 
 # define W 119
@@ -34,13 +35,13 @@
 
 # define TILE_SIZE 64
 # define PI 3.1415929
-# define FOV 1.047197633
+# define FOV 1.0471975512
 
 # define NORTH 1
 # define SOUTH 2
 # define EAST 3
 # define WEST 4
-
+# define DOOR 5
 
 typedef struct s_list
 {
@@ -78,13 +79,13 @@ typedef struct s_map
 
 typedef struct s_column
 {
-	int				tex_x; // x coordinats of where the ray hit
-	float			tex_y; // current y coordinats in the texture
-	int				wall; // which wall the ray hit
-	float			start; // start of the column
-	float			end; //end of the column
-	float			length; // length of the column
-	float			pixel_step; // how many steps u increment each time in the texture y
+	int				tex_x;
+	float			tex_y;
+	int				wall;
+	float			start;
+	float			end;
+	float			length;
+	float			pixel_step;
 }					t_column;
 
 typedef struct s_ray
@@ -106,6 +107,7 @@ typedef struct s_ray
 typedef struct s_key
 {
 	int				speed;
+	int				door_status;
 	int				esc;
 	int				w;
 	int				d;
@@ -130,10 +132,9 @@ typedef struct s_cube
 	void			*mlx;
 	void			*win;
 
-	int 			mouse_prev_x;
+	int				mouse_prev_x;
 	int				mouse_prev_y;
-	int 			mouse_drag;
-	
+	int				mouse_drag;
 	t_list			*lines;
 	t_texture		image;
 	char			*f;
@@ -149,9 +150,10 @@ typedef struct s_cube
 	t_texture		so;
 	t_texture		we;
 	t_texture		ea;
+	t_texture		door;
 
 	unsigned int	floor;
-	unsigned int	celling;
+	unsigned int	ceiling;
 
 }					t_cube;
 
@@ -163,17 +165,22 @@ void				check_player(char **map);
 void				init_elements(t_cube *cube);
 void				parse(int argc, char **argv, t_cube *cube);
 void				init_data(t_cube *cube);
-// rendering
 
+// rendering
 void				render(t_cube *cube);
 float				fix_angle(float angle);
 void				ray_casting(t_cube *cube, float new_angle);
+
+//events
 int					detect_move(void *ptr);
 int					close_window(t_cube *cube);
 int					player_movement(t_cube *cub);
 int					mouse_move(int x, int y, t_cube *cube);
 int					pressed(int key, void *ptr);
 int					released(int key, void *ptr);
+int					mouse_release(int button, int x, int y, t_cube *cub);
+int					mouse_press(int button, int x, int y, t_cube *cub);
+
 // utils
 unsigned long long	ft_atol(const char *str);
 void				ft_error(char *message);
@@ -203,5 +210,6 @@ char				*ft_strdup(const char *s1);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*get_next_line(int fd);
+void				*ft_memset(void *b, int c, size_t len);
 
 #endif
