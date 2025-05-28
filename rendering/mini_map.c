@@ -12,8 +12,6 @@ void	init_minimap(t_cube *cube)
 	cube->minimap.center_y = cube->minimap.position_x
 		+ (cube->minimap.tile_count * cube->minimap.scale) / 2;
 	cube->minimap.size = cube->minimap.scale * 0.7;
-	cube->minimap.player_x = (int)(cube->player.x / TILE_SIZE);
-	cube->minimap.player_y = (int)(cube->player.y / TILE_SIZE);
 }
 
 static void	draw_minimap_tile(t_cube *cube, int map_x, int map_y, int color)
@@ -69,7 +67,7 @@ static void	draw_minimap_player(t_cube *cube)
 
 int	get_color(int map_x, int map_y, t_cube *cube)
 {
-	char	*tile;
+	char	tile;
 
 	if (map_y >= 0 && map_y < cube->map.length && map_x >= 0
 		&& map_x < (int)ft_strlen(cube->map.map[map_y]))
@@ -77,7 +75,7 @@ int	get_color(int map_x, int map_y, t_cube *cube)
 		tile = cube->map.map[map_y][map_x];
 		if (tile == '1')
 			return (0x444444);
-		else if (tile == 'D' )
+		else if (tile == 'D')
 			return (0x990000);
 		else if (tile == 'O')
 			return (0xFFA500);
@@ -88,6 +86,35 @@ int	get_color(int map_x, int map_y, t_cube *cube)
 		return (0x000000);
 }
 
+void	draw_minimap_border(t_cube *cube)
+{
+	int	x;
+	int	y;
+	int	size;
+	int	color;
+
+	size = cube->minimap.tile_count * cube->minimap.scale;
+	color = 0xCCCCCC;
+	x = 0;
+	while (x < size)
+	{
+		pixel_put(cube, cube->minimap.position_x + x, cube->minimap.position_y,
+			color);
+		pixel_put(cube, cube->minimap.position_x + x, cube->minimap.position_y
+			+ size - 1, color);
+		x++;
+	}
+	y = 0;
+	while (y < size)
+	{
+		pixel_put(cube, cube->minimap.position_x, cube->minimap.position_y + y,
+			color);
+		pixel_put(cube, cube->minimap.position_x + size - 1,
+			cube->minimap.position_y + y, color);
+		y++;
+	}
+}
+
 void	render_minimap(t_cube *cube)
 {
 	int	dx;
@@ -96,7 +123,8 @@ void	render_minimap(t_cube *cube)
 	int	map_y;
 	int	color;
 
-	init_minimap(cube);
+	cube->minimap.player_x = (int)(cube->player.x / TILE_SIZE);
+	cube->minimap.player_y = (int)(cube->player.y / TILE_SIZE);
 	dy = -cube->minimap.radius;
 	while (dy <= cube->minimap.radius)
 	{
@@ -112,5 +140,6 @@ void	render_minimap(t_cube *cube)
 		}
 		dy++;
 	}
+	draw_minimap_border(cube);
 	draw_minimap_player(cube);
 }

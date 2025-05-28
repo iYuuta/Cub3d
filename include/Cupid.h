@@ -6,7 +6,6 @@
 # include <limits.h>
 # include <math.h>
 # include <stdio.h>
-# include <stdio.h> // to remove later
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
@@ -187,6 +186,7 @@ float				fix_angle(float angle);
 void				ray_casting(t_cube *cube, float new_angle);
 void				render_minimap(t_cube *cub);
 void				pixel_put(t_cube *cub, int x, int y, int color);
+void				init_minimap(t_cube *cube);
 // events
 int					detect_move(void *ptr);
 int					close_window(t_cube *cube);

@@ -48,6 +48,7 @@ void	init_data(t_cube *cube)
 	cube->ray.curr_x = 0;
 	cube->ray.curr_y = 0;
 	cube->key.esc = 0;
+	init_minimap(cube);
 }
 
 void	init_mlx(t_cube *cube)
@@ -60,11 +61,11 @@ void	init_mlx(t_cube *cube)
 		ft_exit(EXIT_FAILURE);
 	cube->image.texture = mlx_new_image(cube->mlx, WIDTH, HEIGHT);
     if (!cube->image.texture)
-        exit(1); //free sum stuff
+        ft_exit(EXIT_FAILURE);
     cube->image.addr = mlx_get_data_addr(cube->image.texture,
         &(cube->image.bits_per_pixel), &(cube->image.size_line), &(cube->image.endian));
     if (!cube->image.addr)
-        exit(1); //free sum stuff
+        ft_exit(EXIT_FAILURE);
 	cube->key.door_status = 0;
 	mlx_hook(cube->win, CLOSE_BUTTON, 0, close_window, cube);
 }
@@ -79,7 +80,3 @@ int	main(int argc, char **argv)
 	ft_free();
 	return (EXIT_SUCCESS);
 }
-
-
-// door near two walls
-// mini map centered on player
