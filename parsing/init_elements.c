@@ -74,14 +74,7 @@ static void	init_texture(t_cube *cube)
 			&cube->ea.bits_per_pixel,
 			&cube->ea.size_line,
 			&cube->ea.endian);
-	cube->door.texture = mlx_xpm_file_to_image(cube->mlx, "textures/closed_door.xpm",
-			&cube->door.height, &cube->door.width);
-	if (!cube->door.texture)
-		ft_error("Failed to load the door texture file");
-	cube->door.addr = mlx_get_data_addr(cube->door.texture,
-			&cube->door.bits_per_pixel,
-			&cube->door.size_line,
-			&cube->door.endian);
+	change_sprite(cube);
 }
 
 void	init_elements(t_cube *cube)
