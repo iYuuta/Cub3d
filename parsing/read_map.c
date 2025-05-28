@@ -54,6 +54,7 @@ void	parse(int argc, char **argv, t_cube *cube)
 	print_map(cube->map.map);
 	check_map(cube->map.map);
 	check_player(cube->map.map);
+	check_valid_door(cube->map.map);
 	init_data(cube);
 	player_movement(cube);
 }

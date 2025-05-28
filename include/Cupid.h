@@ -176,6 +176,7 @@ typedef struct s_cube
 void				init_rgb(char *str, unsigned int *rgb);
 void				init_map(t_cube *cube);
 void				check_map(char **map);
+void				check_valid_door(char **map);
 void				check_player(char **map);
 void				init_elements(t_cube *cube);
 void				parse(int argc, char **argv, t_cube *cube);
@@ -228,7 +229,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*get_next_line(int fd);
 void				*ft_memset(void *b, int c, size_t len);
-void 				change_sprite(t_cube *cube);
+void				change_sprite(t_cube *cube);
 long				current_time(void);
 
 #endif
