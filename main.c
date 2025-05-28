@@ -37,17 +37,8 @@ void	init_data(t_cube *cube)
 	cube->player.v_angle = HEIGHT / 2;
 	cube->player.x = (x * TILE_SIZE) + 32;
 	cube->player.y = (y * TILE_SIZE) + 32;
-	cube->ray.x_dir = 0;
-	cube->ray.y_dir = 0;
-	cube->ray.x_dist = 0;
-	cube->ray.y_dist = 0;
-	cube->ray.x_step = 0;
-	cube->ray.y_step = 0;
-	cube->ray.x_side_dis = 0;
-	cube->ray.y_side_dis = 0;
-	cube->ray.curr_x = 0;
-	cube->ray.curr_y = 0;
-	cube->key.esc = 0;
+	ft_memset(&(cube->ray), 0, sizeof(t_ray));
+	ft_memset(&(cube->key), 0, sizeof(t_key));
 	init_minimap(cube);
 }
 

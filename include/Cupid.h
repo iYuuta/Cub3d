@@ -166,7 +166,7 @@ typedef struct s_cube
 	t_texture		we;
 	t_texture		ea;
 	t_texture		door[11];
-	t_texture		*curr_door;
+	int				curr_door;
 
 	unsigned int	floor;
 	unsigned int	ceiling;
