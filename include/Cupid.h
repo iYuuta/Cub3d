@@ -149,6 +149,7 @@ typedef struct s_cube
 	int				mouse_prev_x;
 	int				mouse_prev_y;
 	int				mouse_drag;
+	int				sprite_timer;
 	t_list			*lines;
 	t_texture		image;
 	char			*f;
@@ -227,5 +228,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*get_next_line(int fd);
 void				*ft_memset(void *b, int c, size_t len);
+void 				change_sprite(t_cube *cube);
+long				current_time(void);
 
 #endif

@@ -69,7 +69,7 @@ static void	draw_minimap_player(t_cube *cube)
 
 int	get_color(int map_x, int map_y, t_cube *cube)
 {
-	char	*tile;
+	char	tile;
 
 	if (map_y >= 0 && map_y < cube->map.length && map_x >= 0
 		&& map_x < (int)ft_strlen(cube->map.map[map_y]))
