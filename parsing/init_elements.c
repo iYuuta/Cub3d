@@ -74,6 +74,7 @@ static void	init_texture(t_cube *cube)
 			&cube->ea.bits_per_pixel,
 			&cube->ea.size_line,
 			&cube->ea.endian);
+	init_sprites(cube);
 	change_sprite(cube);
 }
 

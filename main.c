@@ -67,6 +67,7 @@ void	init_mlx(t_cube *cube)
     if (!cube->image.addr)
         ft_exit(EXIT_FAILURE);
 	cube->key.door_status = 0;
+	cube->sprite_timer = current_time();
 	mlx_hook(cube->win, CLOSE_BUTTON, 0, close_window, cube);
 }
 

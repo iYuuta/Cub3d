@@ -1,8 +1,7 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS =
-CFLAGS = 
+CFLAGS = -g -fsanitize=address
 RM = rm -f
 
 movements = movements/player_movement.c movements/events.c movements/mouse_hooks.c
@@ -13,7 +12,7 @@ UTILS = utils/ft_atol.c utils/ft_exit.c utils/ft_free.c utils/ft_gc.c utils/ft_i
 			utils/ft_error.c utils/ft_lstnew.c utils/ft_lstadd_back.c \
 			utils/ft_lstsize.c utils/ft_malloc.c utils/ft_lstlast.c utils/ft_putendl_fd.c utils/ft_putstr_fd.c utils/ft_split.c utils/ft_strchr.c utils/ft_strcmp.c \
 			utils/ft_strcspn.c utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_strncmp.c utils/ft_strspn.c utils/ft_substr.c \
-			utils/get_next_line.c utils/ft_memset.c utils/change_sprite.c
+			utils/get_next_line.c utils/ft_memset.c utils/change_sprite.c utils/ft_itoa.c
 
 PARSING = parsing/read_map.c parsing/init_rgb.c parsing/check_map.c parsing/init_elements.c parsing/init_map.c parsing/print_map.c
 

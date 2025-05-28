@@ -148,7 +148,7 @@ typedef struct s_cube
 	int				mouse_prev_x;
 	int				mouse_prev_y;
 	int				mouse_drag;
-	int				sprite_timer;
+	long long		sprite_timer;
 	t_list			*lines;
 	t_texture		image;
 	char			*f;
@@ -165,7 +165,8 @@ typedef struct s_cube
 	t_texture		so;
 	t_texture		we;
 	t_texture		ea;
-	t_texture		door;
+	t_texture		door[11];
+	t_texture		*curr_door;
 
 	unsigned int	floor;
 	unsigned int	ceiling;
@@ -231,5 +232,7 @@ char				*get_next_line(int fd);
 void				*ft_memset(void *b, int c, size_t len);
 void				change_sprite(t_cube *cube);
 long				current_time(void);
+void				init_sprites(t_cube *cube);
+char    			*ft_itoa(int n);
 
 #endif

@@ -1,5 +1,31 @@
 #include "Cupid.h"
 
+
+void    init_sprites(t_cube *cube)
+{
+    int	i;
+	char 		*name;
+
+	i = 0;
+	while (i < 11)
+	{
+		name = ft_strjoin("textures/fog/", ft_itoa(i + 1));
+		if (!name)
+			exit(5);
+		name = ft_strjoin(name, ".xpm");
+		if (!name)
+			exit(5);
+		cube->door[i].texture = mlx_xpm_file_to_image(cube->mlx, name, &(cube->door[i].width), &(cube->door[i].height));
+		if (!cube->door[i].texture)
+			ft_exit(EXIT_FAILURE);
+		cube->door[i].addr =  mlx_get_data_addr(cube->door[i].texture,
+        &(cube->door[i].bits_per_pixel), &(cube->door[i].size_line), &(cube->door[i].endian));
+    	if (!cube->door[i].addr)
+        	ft_exit(EXIT_FAILURE);
+		i++;
+	}
+}
+
 long    current_time(void)
 {
         struct timeval  tv;
@@ -11,28 +37,9 @@ long    current_time(void)
 void change_sprite(t_cube *cube)
 {
     static int counter;
-    char *path;
 
-    if (counter == 0)
-        path = "textures/door_0.xpm";
-    else if (counter == 1)
-        path = "textures/door_1.xpm";
-    else if (counter == 2)
-        path = "textures/door_2.xpm";
-    else if (counter == 3)
-        path = "textures/door_3.xpm";
-    else if (counter == 4)
-    {
-        path = "textures/door_4.xpm";
+    cube->curr_door = &(cube->door[counter]);
+    if (counter == 10)
         counter = -1;
-    }
     counter++;
-	cube->door.texture = mlx_xpm_file_to_image(cube->mlx, path,
-			&cube->door.height, &cube->door.width);
-	if (!cube->door.texture)
-		ft_error("Failed to load the door texture file");
-	cube->door.addr = mlx_get_data_addr(cube->door.texture,
-			&cube->door.bits_per_pixel,
-			&cube->door.size_line,
-			&cube->door.endian);
 }

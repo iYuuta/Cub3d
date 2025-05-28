@@ -88,7 +88,7 @@ int	detect_move(void *ptr)
 		move_player(cub, -y, x);
 	if (cub->key.a == 1)
 		move_player(cub, y, -x);
-	if (current_time() - cub->sprite_timer > 250)
+	if (current_time() - cub->sprite_timer > 90)
 	{
 		cub->sprite_timer = current_time();
 		change_sprite(cub);
@@ -98,7 +98,6 @@ int	detect_move(void *ptr)
 
 int	player_movement(t_cube *cub)
 {
-	cub->sprite_timer = current_time();
 	render(cub);
 	mlx_hook(cub->win, 2, 1L << 0, pressed, cub);
 	mlx_hook(cub->win, 3, 1L << 1, released, cub);
