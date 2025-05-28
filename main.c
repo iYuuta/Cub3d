@@ -47,6 +47,7 @@ void	init_data(t_cube *cube)
 	cube->ray.y_side_dis = 0;
 	cube->ray.curr_x = 0;
 	cube->ray.curr_y = 0;
+	cube->key.esc = 0;
 }
 
 void	init_mlx(t_cube *cube)
@@ -78,3 +79,7 @@ int	main(int argc, char **argv)
 	ft_free();
 	return (EXIT_SUCCESS);
 }
+
+
+// door near two walls
+// mini map centered on player

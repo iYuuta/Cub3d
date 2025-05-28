@@ -16,16 +16,14 @@ int	mouse_move(int x, int y, t_cube *cub)
 	cub->mouse_prev_x = x;
 	cub->mouse_prev_y = y;
 	if (delta_y < 0 && cub->player.v_angle < 720)
-		cub->player.v_angle += 4;
+		cub->player.v_angle += 6;
 	else if (delta_y > 0 && cub->player.v_angle > 0)
-		cub->player.v_angle -= 4;
+		cub->player.v_angle -= 6;
 	if (delta_x < 0)
 		cub->player.h_angle -= 0.02;
 	else if (delta_x > 0)
 		cub->player.h_angle += 0.02;
-	if (cub->player.h_angle < 0 || cub->player.h_angle > 2 * PI)
-		cub->player.h_angle = fix_angle(cub->player.h_angle);
-	detect_move(cub);
+	render(cub);
 	return (0);
 }
 

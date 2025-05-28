@@ -3,12 +3,12 @@
 
 # include "../mlx/mlx.h"
 # include <fcntl.h>
-# include <sys/time.h>
 # include <limits.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdio.h> // to remove later
 # include <stdlib.h>
+# include <sys/time.h>
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
@@ -18,6 +18,10 @@
 # define TITLE "cub3D"
 # define HEIGHT 720
 # define WIDTH 1280
+# define MINIMAP_SCALE 5
+# define MINIMAP_SIZE (WIDTH * MINIMAP_SCALE)
+# define MINIMAP_START_X 10
+# define MINIMAP_START_Y 630
 
 # define ESC 65307
 # define SPACE 32
@@ -170,8 +174,9 @@ void				init_data(t_cube *cube);
 void				render(t_cube *cube);
 float				fix_angle(float angle);
 void				ray_casting(t_cube *cube, float new_angle);
-
-//events
+void				render_minimap(t_cube *cub);
+void				pixel_put(t_cube *cub, int x, int y, int color);
+// events
 int					detect_move(void *ptr);
 int					close_window(t_cube *cube);
 int					player_movement(t_cube *cub);

@@ -101,5 +101,6 @@ void	render(t_cube *cub)
 		dir += FOV / WIDTH;
 		x++;
 	}
+	render_minimap(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->image.texture, 0, 0);
 }

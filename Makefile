@@ -7,7 +7,7 @@ RM = rm -f
 
 movements = movements/player_movement.c movements/events.c movements/mouse_hooks.c
 
-rendering = rendering/rendering.c rendering/ray_casting.c
+rendering = rendering/rendering.c rendering/ray_casting.c rendering/mini_map.c
 
 UTILS = utils/ft_atol.c utils/ft_exit.c utils/ft_free.c utils/ft_gc.c utils/ft_isallspace.c utils/ft_isdigit.c utils/ft_isin.c utils/ft_isspace.c \
 			utils/ft_error.c utils/ft_lstnew.c utils/ft_lstadd_back.c \
