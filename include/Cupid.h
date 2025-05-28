@@ -18,10 +18,6 @@
 # define TITLE "cub3D"
 # define HEIGHT 720
 # define WIDTH 1280
-# define MINIMAP_SCALE 5
-# define MINIMAP_SIZE (WIDTH * MINIMAP_SCALE)
-# define MINIMAP_START_X 10
-# define MINIMAP_START_Y 630
 
 # define ESC 65307
 # define SPACE 32
@@ -131,6 +127,20 @@ typedef struct s_player
 	int				v_angle;
 }					t_player;
 
+typedef struct s_minimap
+{
+	int				scale;
+	int				position_x;
+	int				position_y;
+	int				radius;
+	int				tile_count;
+	int				center_x;
+	int				center_y;
+	int				size;
+	int				player_x;
+	int				player_y;
+}					t_minimap;
+
 typedef struct s_cube
 {
 	void			*mlx;
@@ -144,6 +154,7 @@ typedef struct s_cube
 	char			*f;
 	char			*c;
 
+	t_minimap		minimap;
 	t_ray			ray;
 	t_column		column;
 	t_map			map;

@@ -23,7 +23,6 @@ int	mouse_move(int x, int y, t_cube *cub)
 		cub->player.h_angle -= 0.02;
 	else if (delta_x > 0)
 		cub->player.h_angle += 0.02;
-	render(cub);
 	return (0);
 }
 

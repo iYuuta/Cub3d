@@ -1,73 +1,114 @@
 #include "Cupid.h"
 
-static void	draw_minimap_tile(t_cube *cub, int map_x, int map_y, int color)
+void	init_minimap(t_cube *cube)
+{
+	cube->minimap.scale = 10;
+	cube->minimap.position_x = 10;
+	cube->minimap.position_y = 10;
+	cube->minimap.radius = 10;
+	cube->minimap.tile_count = 2 * cube->minimap.radius + 1;
+	cube->minimap.center_x = cube->minimap.position_x
+		+ (cube->minimap.tile_count * cube->minimap.scale) / 2;
+	cube->minimap.center_y = cube->minimap.position_x
+		+ (cube->minimap.tile_count * cube->minimap.scale) / 2;
+	cube->minimap.size = cube->minimap.scale * 0.7;
+	cube->minimap.player_x = (int)(cube->player.x / TILE_SIZE);
+	cube->minimap.player_y = (int)(cube->player.y / TILE_SIZE);
+}
+
+static void	draw_minimap_tile(t_cube *cube, int map_x, int map_y, int color)
 {
 	int	x;
 	int	y;
-	int start_x;
-	int start_y;
+	int	start_x;
+	int	start_y;
 
-	start_x = MINIMAP_START_X + map_x * MINIMAP_SCALE;
-	start_y = MINIMAP_START_Y + map_y * MINIMAP_SCALE;
+	start_x = cube->minimap.position_x + map_x * cube->minimap.scale;
+	start_y = cube->minimap.position_y + map_y * cube->minimap.scale;
 	y = 0;
-	while (y < MINIMAP_SCALE)
+	while (y < cube->minimap.scale)
 	{
 		x = 0;
-		while (x < MINIMAP_SCALE)
+		while (x < cube->minimap.scale)
 		{
-			pixel_put(cub, start_x + x, start_y + y, color);
+			pixel_put(cube, start_x + x, start_y + y, color);
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	draw_minimap_player(t_cube *cub)
+static void	draw_minimap_player(t_cube *cube)
 {
+	int	tile_count;
 	int	x;
 	int	y;
 	int	i;
-	int	player_x;
-	int	player_y;
 
-	player_x = MINIMAP_START_X + (int)(cub->player.x / TILE_SIZE * MINIMAP_SCALE);
-	player_y = MINIMAP_START_Y + (int)(cub->player.y / TILE_SIZE * MINIMAP_SCALE);
-	pixel_put(cub, player_x, player_y, 0xE60000);
-	pixel_put(cub, player_x + 1, player_y, 0xE60000);
-	pixel_put(cub, player_x, player_y + 1, 0xE60000);
-	pixel_put(cub, player_x + 1, player_y + 1, 0xE60000);
-	i = 0;
-	while (i < 5)
+	y = 0;
+	while (y < cube->minimap.size)
 	{
-		x = player_x + (int)(cos(cub->player.h_angle) * i);
-		y = player_y + (int)(sin(cub->player.h_angle) * i);
-		pixel_put(cub, x, y, 0xFF0000);
+		x = 0;
+		while (x < cube->minimap.size)
+		{
+			pixel_put(cube, cube->minimap.center_x - cube->minimap.size / 2 + x,
+				cube->minimap.center_y - cube->minimap.size / 2 + y, 0xE60000);
+			x++;
+		}
+		y++;
+	}
+	i = 0;
+	while (i < cube->minimap.size + 5)
+	{
+		x = cube->minimap.center_x + (int)(cos(cube->player.h_angle) * i);
+		y = cube->minimap.center_y + (int)(sin(cube->player.h_angle) * i);
+		pixel_put(cube, x, y, 0xFF0000);
 		i++;
 	}
 }
 
-void	render_minimap(t_cube *cub)
+int	get_color(int map_x, int map_y, t_cube *cube)
 {
-	int		x;
-	int		y;
-	char	tile;
+	char	*tile;
 
-	y = 0;
-	while (y < cub->map.length)
+	if (map_y >= 0 && map_y < cube->map.length && map_x >= 0
+		&& map_x < (int)ft_strlen(cube->map.map[map_y]))
 	{
-		x = 0;
-		while (x < (int)ft_strlen(cub->map.map[y]))
-		{
-			tile = cub->map.map[y][x];
-			if (tile == '1')
-				draw_minimap_tile(cub, x, y, 0x444444);
-			else if (tile == 'D' || tile == 'O')
-				draw_minimap_tile(cub, x, y, 0xFFA500);
-			else if (tile == '0')
-				draw_minimap_tile(cub, x, y, 0xCCCCCC);
-			x++;
-		}
-		y++;
+		tile = cube->map.map[map_y][map_x];
+		if (tile == '1')
+			return (0x444444);
+		else if (tile == 'D' || tile == 'O')
+			return (0xFFA500);
+		else if (tile == '0')
+			return (0xCCCCCC);
 	}
-	draw_minimap_player(cub);
+	else
+		return (0x000000);
+}
+
+void	render_minimap(t_cube *cube)
+{
+	int	dx;
+	int	dy;
+	int	map_x;
+	int	map_y;
+	int	color;
+
+	init_minimap(cube);
+	dy = -cube->minimap.radius;
+	while (dy <= cube->minimap.radius)
+	{
+		dx = -cube->minimap.radius;
+		while (dx <= cube->minimap.radius)
+		{
+			map_x = cube->minimap.player_x + dx;
+			map_y = cube->minimap.player_y + dy;
+			color = get_color(map_x, map_y, cube);
+			draw_minimap_tile(cube, dx + cube->minimap.radius, dy
+				+ cube->minimap.radius, color);
+			dx++;
+		}
+		dy++;
+	}
+	draw_minimap_player(cube);
 }
