@@ -77,9 +77,11 @@ int	get_color(int map_x, int map_y, t_cube *cube)
 		tile = cube->map.map[map_y][map_x];
 		if (tile == '1')
 			return (0x444444);
-		else if (tile == 'D' || tile == 'O')
+		else if (tile == 'D' )
+			return (0x990000);
+		else if (tile == 'O')
 			return (0xFFA500);
-		else if (tile == '0')
+		else if (ft_isin(tile, "0NSEW"))
 			return (0xCCCCCC);
 	}
 	else
