@@ -38,7 +38,7 @@ void	check_door(t_cube *cub)
 	y = (cub->player.y / TILE_SIZE) + sin(cub->player.h_angle) * 1;
 	if (y < 0 || y >= cub->map.length)
 		return ;
-	if (x < 0 || x >= ft_strlen(cub->map.map[y]))
+	if (x < 0 || x >= (int)ft_strlen(cub->map.map[y]))
 		return ;
 	cub->key.door_status += 1;
 	if (cub->map.map[y][x] == 'D')
@@ -84,6 +84,7 @@ int	detect_move(void *ptr)
 		change_sprite(cub);
 	}
 	render(cub);
+	return (0);
 }
 
 int	player_movement(t_cube *cub)

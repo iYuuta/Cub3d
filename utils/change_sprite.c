@@ -20,19 +20,19 @@ void	init_sprites(t_cube *cube)
 	{
 		name = ft_strjoin("textures/fog/", ft_itoa(i + 1));
 		if (!name)
-			ft_error("Failed to find door texture file");
+			ft_error("Failed to find door texture file", cube);
 		name = ft_strjoin(name, ".xpm");
 		if (!name)
-			ft_error("Failed to find door texture file");
+			ft_error("Failed to find door texture file", cube);
 		cube->door[i].texture = mlx_xpm_file_to_image(cube->mlx, name,
 				&(cube->door[i].width), &(cube->door[i].height));
 		if (!cube->door[i].texture)
-			ft_error("Failed to load the door texture file");
+			ft_error("Failed to load the door texture file", cube);
 		cube->door[i].addr = mlx_get_data_addr(cube->door[i].texture,
 				&(cube->door[i].bits_per_pixel), &(cube->door[i].size_line),
 				&(cube->door[i].endian));
 		if (!cube->door[i].addr)
-			ft_error("Failed to load the door texture file");
+			ft_error("Failed to load the door texture file", cube);
 		i++;
 	}
 	change_sprite(cube);

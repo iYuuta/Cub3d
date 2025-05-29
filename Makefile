@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 movements = movements/player_movement.c movements/events.c movements/mouse_hooks.c
@@ -14,7 +14,7 @@ UTILS = utils/ft_atol.c utils/ft_exit.c utils/ft_free.c utils/ft_gc.c utils/ft_i
 			utils/ft_strcspn.c utils/ft_strdup.c utils/ft_strjoin.c utils/ft_strlen.c utils/ft_strncmp.c utils/ft_strspn.c utils/ft_substr.c \
 			utils/get_next_line.c utils/ft_memset.c utils/change_sprite.c utils/ft_itoa.c
 
-PARSING = parsing/read_map.c parsing/init_rgb.c parsing/check_map.c parsing/init_elements.c parsing/init_map.c parsing/print_map.c
+PARSING = parsing/read_map.c parsing/init_rgb.c parsing/check_map.c parsing/init_elements.c parsing/init_map.c
 
 SRC = $(UTILS) $(PARSING) $(rendering) $(movements) main.c
 OBJ = $(SRC:.c=.o)

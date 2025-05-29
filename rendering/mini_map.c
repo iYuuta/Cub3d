@@ -24,7 +24,6 @@ static void	draw_minimap_tile(t_cube *cube, int map_x, int map_y, int color)
 
 static void	draw_minimap_player(t_cube *cube)
 {
-	int	tile_count;
 	int	x;
 	int	y;
 	int	i;
@@ -68,8 +67,7 @@ int	get_color(int map_x, int map_y, t_cube *cube)
 		else if (ft_isin(tile, "0NSEW"))
 			return (0xCCCCCC);
 	}
-	else
-		return (0x000000);
+	return (0x000000);
 }
 
 void	draw_minimap_border(t_cube *cube)

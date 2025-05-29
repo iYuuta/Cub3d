@@ -1,6 +1,6 @@
 #include "Cupid.h"
 
-static void	valid_format(char *str)
+static void	valid_format(char *str, t_cube *cube)
 {
 	int	i;
 
@@ -12,7 +12,7 @@ static void	valid_format(char *str)
 		str++;
 	}
 	if (i != 3)
-		ft_error("Invalid color format (R,G,B)");
+		ft_error("Invalid color format (R,G,B)", cube);
 }
 
 int	valid_number(char *str)
@@ -20,6 +20,8 @@ int	valid_number(char *str)
 	size_t	i;
 
 	i = 0;
+	if (!str || !str[0])
+		return (0);
 	while (ft_isspace(str[i]))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
@@ -37,20 +39,20 @@ int	valid_number(char *str)
 	return (1);
 }
 
-void	init_rgb(char *str, unsigned int *rgb)
+void	init_rgb(char *str, unsigned int *rgb, t_cube *cube)
 {
 	char	**split;
 
 	if (!*str)
 		return ;
-	valid_format(str);
+	valid_format(str, cube);
 	split = ft_split(str, ',');
 	if (!split)
-		ft_error("Failed to split color");
+		ft_error("Failed to split color", cube);
 	if (!valid_number(split[0])
 		|| !valid_number(split[1])
 		|| !valid_number(split[2]))
-		ft_error("Invalid RGB value");
+		ft_error("Invalid RGB value", cube);
 	*rgb = (ft_atol(split[0]) << 16)
 		| (ft_atol(split[1]) << 8)
 		| ft_atol(split[2]);

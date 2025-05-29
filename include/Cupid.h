@@ -174,11 +174,11 @@ typedef struct s_cube
 }					t_cube;
 
 // parsing
-void				init_rgb(char *str, unsigned int *rgb);
+void				init_rgb(char *str, unsigned int *rgb, t_cube *cube);
 void				init_map(t_cube *cube);
-void				check_map(char **map);
-void				check_valid_door(char **map);
-void				check_player(char **map);
+void				check_map(char **map, t_cube *cube);
+void				check_valid_door(char **map, t_cube *cube);
+void				check_player(char **map, t_cube *cube);
 void				init_elements(t_cube *cube);
 void				parse(int argc, char **argv, t_cube *cube);
 void				init_data(t_cube *cube);
@@ -207,8 +207,8 @@ int					check_angle(t_cube *cub);
 
 // utils
 unsigned long long	ft_atol(const char *str);
-void				ft_error(char *message);
-void				ft_exit(int exit_status);
+void				ft_error(char *message, t_cube *cube);
+void				ft_exit(int exit_status, t_cube *cube);
 void				ft_free(void);
 t_gc				**ft_gc(void);
 int					ft_isdigit(char c);

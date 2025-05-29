@@ -1,13 +1,13 @@
 NO ./textures/wall_1.xpm 
-SO ./textures/wall_1.xpm
-WE ./textures/wall_1.xpm
-EA ./textures/wall_1.xpm
+SO ./textures/wall_2.xpm
+WE ./textures/wall_3.xpm
+EA ./textures/wall_4.xpm
 
-F 24, 24, 24
+F 24, 24,0
 C 0,0,0
 
         1111111111111111111111111
-        1100000000010000000000001
+        11000000000100001D1000001
         10110000011100001D1000001
         1001000001010000000000001
         10010000010100000N0000001

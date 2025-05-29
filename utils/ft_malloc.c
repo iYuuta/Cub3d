@@ -9,10 +9,10 @@ void	*ft_malloc(size_t size)
 	head = ft_gc();
 	ptr = malloc(size);
 	if (!ptr)
-		ft_exit(EXIT_FAILURE);
+		ft_exit(EXIT_FAILURE, NULL);
 	new_node = malloc(sizeof(t_gc));
 	if (!new_node)
-		ft_exit(EXIT_FAILURE);
+		ft_exit(EXIT_FAILURE, NULL);
 	new_node->ptr = ptr;
 	new_node->next = *head;
 	*head = new_node;

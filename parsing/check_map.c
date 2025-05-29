@@ -1,6 +1,6 @@
 #include "Cupid.h"
 
-void	check_valid_door(char **map)
+void	check_valid_door(char **map, t_cube *cube)
 {
 	int	i;
 	int	j;
@@ -18,7 +18,7 @@ void	check_valid_door(char **map)
 				{
 					if (!(map[i][j - 1] == '1' && map[i][j + 1] == '1')
 						&& !(map[i - 1][j] == '1' && map[i + 1][j] == '1'))
-						ft_error("Door must be between two walls");
+						ft_error("Door must be between two walls", cube);
 				}
 			}
 			j++;
@@ -27,7 +27,7 @@ void	check_valid_door(char **map)
 	}
 }
 
-void	check_map(char **map)
+void	check_map(char **map, t_cube *cube)
 {
 	int	i;
 	int	j;
@@ -45,9 +45,9 @@ void	check_map(char **map)
 					+ 1][j]))
 			{
 				if (ft_isin(map[i][j], "0D"))
-					ft_error("Map must be surrounded by walls");
+					ft_error("Map must be surrounded by walls", cube);
 				else if (ft_isin(map[i][j], "NSEW"))
-					ft_error("Player can't be outside the map");
+					ft_error("Player can't be outside the map", cube);
 			}
 			j++;
 		}
@@ -55,7 +55,7 @@ void	check_map(char **map)
 	}
 }
 
-void	check_player(char **map)
+void	check_player(char **map, t_cube *cube)
 {
 	int	i;
 	int	j;
@@ -75,7 +75,7 @@ void	check_player(char **map)
 		i++;
 	}
 	if (count == 0)
-		ft_error("Map must have a player (N, S, E, W)");
+		ft_error("Map must have a player (N, S, E, W)", cube);
 	if (count > 1)
-		ft_error("Map must have only one player");
+		ft_error("Map must have only one player", cube);
 }

@@ -37,27 +37,26 @@ void	init_data(t_cube *cube)
 	cube->player.v_angle = HEIGHT / 2;
 	cube->player.x = (x * TILE_SIZE) + 32;
 	cube->player.y = (y * TILE_SIZE) + 32;
-	ft_memset(&(cube->ray), 0, sizeof(t_ray));
-	ft_memset(&(cube->key), 0, sizeof(t_key));
 	init_minimap(cube);
 }
 
 void	init_mlx(t_cube *cube)
 {
+	ft_memset(cube, 0 , sizeof(t_cube));
 	cube->mlx = mlx_init();
 	if (!cube->mlx)
-		ft_error("Failed to init mlx");
+		ft_error("Failed to init mlx", cube);
 	cube->win = mlx_new_window(cube->mlx, WIDTH, HEIGHT, TITLE);
 	if (!cube->win)
-		ft_error("Failed to init window");
+		ft_error("Failed to init window", cube);
 	cube->image.texture = mlx_new_image(cube->mlx, WIDTH, HEIGHT);
 	if (!cube->image.texture)
-		ft_error("Failed to init image");
+		ft_error("Failed to init image", cube);
 	cube->image.addr = mlx_get_data_addr(cube->image.texture,
-			&(cube->image.bits_per_pixel),
-			&(cube->image.size_line), &(cube->image.endian));
+			&(cube->image.bits_per_pixel), &(cube->image.size_line),
+			&(cube->image.endian));
 	if (!cube->image.addr)
-		ft_error("Failed to init image address");
+		ft_error("Failed to init image address", cube);
 	cube->key.door_status = 0;
 	cube->sprite_timer = current_time();
 	mlx_hook(cube->win, CLOSE_BUTTON, 0, close_window, cube);

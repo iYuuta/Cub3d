@@ -12,8 +12,6 @@ int	get_pixel_color(t_texture texture, int x, int y)
 {
 	int	offset;
 
-	x %= TILE_SIZE;
-	y %= TILE_SIZE;
 	if (x < 0 || x >= TILE_SIZE || y < 0 || y >= TILE_SIZE)
 		return (0);
 	offset = y * texture.size_line + x * (texture.bits_per_pixel / 8);
