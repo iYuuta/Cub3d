@@ -66,3 +66,18 @@ int	released(int key, void *ptr)
 		cub->key.door_status = 0;
 	return (0);
 }
+
+int	check_angle(t_cube *cub)
+{
+	if (cub->key.up == 1 && cub->player.v_angle < 720)
+		cub->player.v_angle += 8;
+	if (cub->key.left == 1)
+		cub->player.h_angle -= 0.04;
+	if (cub->key.down == 1 && cub->player.v_angle > 0)
+		cub->player.v_angle -= 8;
+	if (cub->key.right == 1)
+		cub->player.h_angle += 0.04;
+	if (cub->player.h_angle < 0 || cub->player.h_angle > 2 * PI)
+		cub->player.h_angle = fix_angle(cub->player.h_angle);
+	return (1);
+}

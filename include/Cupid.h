@@ -190,6 +190,10 @@ void				ray_casting(t_cube *cube, float new_angle);
 void				render_minimap(t_cube *cub);
 void				pixel_put(t_cube *cub, int x, int y, int color);
 void				init_minimap(t_cube *cube);
+int					get_pixel_color(t_texture texture, int x, int y);
+void				get_texture_position(t_cube *cub, float wall_x);
+void				init_minimap(t_cube *cube);
+
 // events
 int					detect_move(void *ptr);
 int					close_window(t_cube *cube);
@@ -199,6 +203,7 @@ int					pressed(int key, void *ptr);
 int					released(int key, void *ptr);
 int					mouse_release(int button, int x, int y, t_cube *cub);
 int					mouse_press(int button, int x, int y, t_cube *cub);
+int					check_angle(t_cube *cub);
 
 // utils
 unsigned long long	ft_atol(const char *str);
@@ -233,6 +238,6 @@ void				*ft_memset(void *b, int c, size_t len);
 void				change_sprite(t_cube *cube);
 long				current_time(void);
 void				init_sprites(t_cube *cube);
-char    			*ft_itoa(int n);
+char				*ft_itoa(int n);
 
 #endif

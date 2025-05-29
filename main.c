@@ -51,12 +51,13 @@ void	init_mlx(t_cube *cube)
 	if (!cube->win)
 		ft_exit(EXIT_FAILURE);
 	cube->image.texture = mlx_new_image(cube->mlx, WIDTH, HEIGHT);
-    if (!cube->image.texture)
-        ft_exit(EXIT_FAILURE);
-    cube->image.addr = mlx_get_data_addr(cube->image.texture,
-        &(cube->image.bits_per_pixel), &(cube->image.size_line), &(cube->image.endian));
-    if (!cube->image.addr)
-        ft_exit(EXIT_FAILURE);
+	if (!cube->image.texture)
+		ft_exit(EXIT_FAILURE);
+	cube->image.addr = mlx_get_data_addr(cube->image.texture,
+			&(cube->image.bits_per_pixel),
+			&(cube->image.size_line), &(cube->image.endian));
+	if (!cube->image.addr)
+		ft_exit(EXIT_FAILURE);
 	cube->key.door_status = 0;
 	cube->sprite_timer = current_time();
 	mlx_hook(cube->win, CLOSE_BUTTON, 0, close_window, cube);

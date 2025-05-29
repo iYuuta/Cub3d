@@ -9,38 +9,6 @@ int	is_out_of_bound(t_map *map, int x, int y)
 	return (0);
 }
 
-void	get_direction(t_cube *cub)
-{
-	float	wall_x;
-
-	cub->ray.dist = cub->ray.x_side_dis - cub->ray.x_dist;
-	if (cub->ray.side == 1)
-	{
-		cub->ray.dist = cub->ray.y_side_dis - cub->ray.y_dist;
-		wall_x = cub->player.x + cub->ray.dist * cub->ray.x_dir;
-		if (cub->map.map[cub->ray.curr_y][cub->ray.curr_x] == 'D')
-			cub->column.wall = DOOR;
-		else if (cub->ray.y_dir < 0)
-			cub->column.wall = NORTH;
-		else
-			cub->column.wall = SOUTH;
-	}
-	else
-	{
-		wall_x = cub->player.y + cub->ray.dist * cub->ray.y_dir;
-		if (cub->map.map[cub->ray.curr_y][cub->ray.curr_x] == 'D')
-			cub->column.wall = DOOR;
-		else if (cub->ray.x_dir < 0)
-			cub->column.wall = WEST;
-		else
-			cub->column.wall = EAST;
-	}
-	wall_x = fmod(wall_x, TILE_SIZE);
-	if (wall_x < 0)
-		wall_x += TILE_SIZE;
-	cub->column.tex_x = (int)(wall_x * (64 / (float)TILE_SIZE));
-}
-
 void	math_init(t_cube *cub, float new_angle)
 {
 	cub->ray.x_dir = cos(new_angle);
@@ -77,6 +45,35 @@ void	skip_first_tile(t_cube *cub, float new_angle)
 	cub->ray.side = 1;
 	if (cub->ray.x_side_dis < cub->ray.y_side_dis)
 		cub->ray.side = 0;
+}
+
+void	get_direction(t_cube *cub)
+{
+	float	wall_x;
+
+	cub->ray.dist = cub->ray.x_side_dis - cub->ray.x_dist;
+	if (cub->ray.side == 1)
+	{
+		cub->ray.dist = cub->ray.y_side_dis - cub->ray.y_dist;
+		wall_x = cub->player.x + cub->ray.dist * cub->ray.x_dir;
+		if (cub->map.map[cub->ray.curr_y][cub->ray.curr_x] == 'D')
+			cub->column.wall = DOOR;
+		else if (cub->ray.y_dir < 0)
+			cub->column.wall = NORTH;
+		else
+			cub->column.wall = SOUTH;
+	}
+	else
+	{
+		wall_x = cub->player.y + cub->ray.dist * cub->ray.y_dir;
+		if (cub->map.map[cub->ray.curr_y][cub->ray.curr_x] == 'D')
+			cub->column.wall = DOOR;
+		else if (cub->ray.x_dir < 0)
+			cub->column.wall = WEST;
+		else
+			cub->column.wall = EAST;
+	}
+	get_texture_position(cub, wall_x);
 }
 
 void	ray_casting(t_cube *cub, float new_angle)

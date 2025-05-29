@@ -1,19 +1,5 @@
 #include "Cupid.h"
 
-void	init_minimap(t_cube *cube)
-{
-	cube->minimap.scale = 10;
-	cube->minimap.position_x = 10;
-	cube->minimap.position_y = 10;
-	cube->minimap.radius = 10;
-	cube->minimap.tile_count = 2 * cube->minimap.radius + 1;
-	cube->minimap.center_x = cube->minimap.position_x
-		+ (cube->minimap.tile_count * cube->minimap.scale) / 2;
-	cube->minimap.center_y = cube->minimap.position_x
-		+ (cube->minimap.tile_count * cube->minimap.scale) / 2;
-	cube->minimap.size = cube->minimap.scale * 0.7;
-}
-
 static void	draw_minimap_tile(t_cube *cube, int map_x, int map_y, int color)
 {
 	int	x;

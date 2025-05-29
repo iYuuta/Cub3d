@@ -52,6 +52,6 @@ void	init_rgb(char *str, unsigned int *rgb)
 		|| !valid_number(split[2]))
 		ft_error("Invalid RGB value");
 	*rgb = (ft_atol(split[0]) << 16)
-			| (ft_atol(split[1]) << 8)
-			| ft_atol(split[2]);
-} 	
+		| (ft_atol(split[1]) << 8)
+		| ft_atol(split[2]);
+}

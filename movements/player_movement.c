@@ -29,21 +29,6 @@ void	move_player(t_cube *cub, float new_x, float new_y)
 	return ;
 }
 
-int	check_angle(t_cube *cub)
-{
-	if (cub->key.up == 1 && cub->player.v_angle < 720)
-		cub->player.v_angle += 8;
-	if (cub->key.left == 1)
-		cub->player.h_angle -= 0.04;
-	if (cub->key.down == 1 && cub->player.v_angle > 0)
-		cub->player.v_angle -= 8;
-	if (cub->key.right == 1)
-		cub->player.h_angle += 0.04;
-	if (cub->player.h_angle < 0 || cub->player.h_angle > 2 * PI)
-		cub->player.h_angle = fix_angle(cub->player.h_angle);
-	return (1);
-}
-
 void	check_door(t_cube *cub)
 {
 	int	y;
@@ -62,6 +47,22 @@ void	check_door(t_cube *cub)
 		cub->map.map[y][x] = 'D';
 }
 
+void	check_move(t_cube *cub, float x, float y)
+{
+	if (cub->key.esc)
+		close_window(cub);
+	if (cub->key.door_status == 1)
+		check_door(cub);
+	if (cub->key.w == 1)
+		move_player(cub, x, y);
+	if (cub->key.s == 1)
+		move_player(cub, -x, -y);
+	if (cub->key.d == 1)
+		move_player(cub, -y, x);
+	if (cub->key.a == 1)
+		move_player(cub, y, -x);
+}
+
 int	detect_move(void *ptr)
 {
 	t_cube	*cub;
@@ -76,18 +77,7 @@ int	detect_move(void *ptr)
 	x = cos(cub->player.h_angle);
 	y = sin(cub->player.h_angle);
 	check_angle(cub);
-	if (cub->key.esc)
-		close_window(cub);
-	if (cub->key.door_status == 1)
-		check_door(cub);
-	if (cub->key.w == 1)
-		move_player(cub, x, y);
-	if (cub->key.s == 1)
-		move_player(cub, -x, -y);
-	if (cub->key.d == 1)
-		move_player(cub, -y, x);
-	if (cub->key.a == 1)
-		move_player(cub, y, -x);
+	check_move(cub, x, y);
 	if (current_time() - cub->sprite_timer > 90)
 	{
 		cub->sprite_timer = current_time();

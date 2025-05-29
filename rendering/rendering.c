@@ -1,33 +1,17 @@
 #include "Cupid.h"
 
-float	fix_angle(float angle)
+void	init_minimap(t_cube *cube)
 {
-	angle = fmod(angle, 2 * PI);
-	if (angle < 0)
-		angle += 2 * PI;
-	return (angle);
-}
-
-int	get_pixel_color(t_texture texture, int x, int y)
-{
-	int	offset;
-
-	x %= TILE_SIZE;
-	y %= TILE_SIZE;
-	if (x < 0 || x >= TILE_SIZE || y < 0 || y >= TILE_SIZE)
-		return (0);
-	offset = y * texture.size_line + x * (texture.bits_per_pixel / 8);
-	return (*(int *)(texture.addr + offset));
-}
-
-void	pixel_put(t_cube *cub, int x, int y, int color)
-{
-	int	offset;
-
-	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-		return ;
-	offset = y * cub->image.size_line + x * (cub->image.bits_per_pixel / 8);
-	*(int *)(cub->image.addr + offset) = color;
+	cube->minimap.scale = 10;
+	cube->minimap.position_x = 10;
+	cube->minimap.position_y = 10;
+	cube->minimap.radius = 10;
+	cube->minimap.tile_count = 2 * cube->minimap.radius + 1;
+	cube->minimap.center_x = cube->minimap.position_x
+		+ (cube->minimap.tile_count * cube->minimap.scale) / 2;
+	cube->minimap.center_y = cube->minimap.position_x
+		+ (cube->minimap.tile_count * cube->minimap.scale) / 2;
+	cube->minimap.size = cube->minimap.scale * 0.7;
 }
 
 void	calculate_column_info(t_cube *cub, float dir)
@@ -63,7 +47,8 @@ void	draw_pixel(t_cube *cub, int x, int y, int tex_y)
 	else if (cub->column.wall == WEST)
 		color = get_pixel_color(cub->we, cub->column.tex_x, tex_y);
 	else if (cub->column.wall == DOOR)
-		color = get_pixel_color(cub->door[cub->curr_door], cub->column.tex_x, tex_y);
+		color = get_pixel_color(cub->door[cub->curr_door],
+				cub->column.tex_x, tex_y);
 	pixel_put(cub, x, y, color);
 }
 
