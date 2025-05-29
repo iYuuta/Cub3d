@@ -42,7 +42,6 @@ void	init_data(t_cube *cube)
 
 void	init_mlx(t_cube *cube)
 {
-	ft_memset(cube, 0 , sizeof(t_cube));
 	cube->mlx = mlx_init();
 	if (!cube->mlx)
 		ft_error("Failed to init mlx", cube);
@@ -57,18 +56,18 @@ void	init_mlx(t_cube *cube)
 			&(cube->image.endian));
 	if (!cube->image.addr)
 		ft_error("Failed to init image address", cube);
-	cube->key.door_status = 0;
-	cube->sprite_timer = current_time();
-	mlx_hook(cube->win, CLOSE_BUTTON, 0, close_window, cube);
 }
 
 int	main(int argc, char **argv)
 {
 	t_cube	cube;
 
-	init_mlx(&cube);
+	ft_memset(&cube, 0 , sizeof(t_cube));
+	cube.sprite_timer = current_time();
 	parse(argc, argv, &cube);
-	mlx_loop(cube.mlx);
+	init_mlx(&cube);
+	init_texture(&cube);
+	player_movement(&cube);
 	ft_free();
 	return (EXIT_SUCCESS);
 }

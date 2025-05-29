@@ -95,6 +95,7 @@ int	player_movement(t_cube *cub)
 	mlx_hook(cub->win, 4, 1L << 2, mouse_press, cub);
 	mlx_hook(cub->win, 5, 1L << 3, mouse_release, cub);
 	mlx_hook(cub->win, 6, 1L << 6, mouse_move, cub);
+	mlx_hook(cub->win, CLOSE_BUTTON, 0, close_window, cub);
 	mlx_loop_hook(cub->mlx, detect_move, cub);
 	mlx_loop(cub->mlx);
 	return (0);

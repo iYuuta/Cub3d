@@ -182,6 +182,7 @@ void				check_player(char **map, t_cube *cube);
 void				init_elements(t_cube *cube);
 void				parse(int argc, char **argv, t_cube *cube);
 void				init_data(t_cube *cube);
+void				init_texture(t_cube *cube);
 
 // rendering
 void				render(t_cube *cube);

@@ -40,7 +40,7 @@ static int	add_element(char *str, t_cube *cube)
 	return (0);
 }
 
-static void	init_texture(t_cube *cube)
+void	init_texture(t_cube *cube)
 {
 	cube->no.texture = mlx_xpm_file_to_image(cube->mlx, cube->no.name,
 			&cube->no.height, &cube->no.width);
@@ -93,5 +93,4 @@ void	init_elements(t_cube *cube)
 	if (!cube->no.name || !cube->so.name || !cube->we.name || !cube->ea.name
 		|| !cube->f || !cube->c)
 		ft_error("Missing Element", cube);
-	init_texture(cube);
 }
