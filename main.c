@@ -46,18 +46,18 @@ void	init_mlx(t_cube *cube)
 {
 	cube->mlx = mlx_init();
 	if (!cube->mlx)
-		ft_exit(EXIT_FAILURE);
+		ft_error("Failed to init mlx");
 	cube->win = mlx_new_window(cube->mlx, WIDTH, HEIGHT, TITLE);
 	if (!cube->win)
-		ft_exit(EXIT_FAILURE);
+		ft_error("Failed to init window");
 	cube->image.texture = mlx_new_image(cube->mlx, WIDTH, HEIGHT);
 	if (!cube->image.texture)
-		ft_exit(EXIT_FAILURE);
+		ft_error("Failed to init image");
 	cube->image.addr = mlx_get_data_addr(cube->image.texture,
 			&(cube->image.bits_per_pixel),
 			&(cube->image.size_line), &(cube->image.endian));
 	if (!cube->image.addr)
-		ft_exit(EXIT_FAILURE);
+		ft_error("Failed to init image address");
 	cube->key.door_status = 0;
 	cube->sprite_timer = current_time();
 	mlx_hook(cube->win, CLOSE_BUTTON, 0, close_window, cube);

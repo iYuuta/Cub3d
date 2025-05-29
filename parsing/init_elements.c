@@ -47,35 +47,26 @@ static void	init_texture(t_cube *cube)
 	if (!cube->no.texture)
 		ft_error("Failed to load the NO texture file");
 	cube->no.addr = mlx_get_data_addr(cube->no.texture,
-			&cube->no.bits_per_pixel,
-			&cube->no.size_line,
-			&cube->no.endian);
+			&cube->no.bits_per_pixel, &cube->no.size_line, &cube->no.endian);
 	cube->so.texture = mlx_xpm_file_to_image(cube->mlx, cube->so.name,
 			&cube->so.height, &cube->so.width);
 	if (!cube->so.texture)
 		ft_error("Failed to load the SO texture file");
 	cube->so.addr = mlx_get_data_addr(cube->so.texture,
-			&cube->so.bits_per_pixel,
-			&cube->so.size_line,
-			&cube->so.endian);
+			&cube->so.bits_per_pixel, &cube->so.size_line, &cube->so.endian);
 	cube->we.texture = mlx_xpm_file_to_image(cube->mlx, cube->we.name,
 			&cube->we.height, &cube->we.width);
 	if (!cube->we.texture)
 		ft_error("Failed to load the WE texture file");
 	cube->we.addr = mlx_get_data_addr(cube->we.texture,
-			&cube->we.bits_per_pixel,
-			&cube->we.size_line,
-			&cube->we.endian);
+			&cube->we.bits_per_pixel, &cube->we.size_line, &cube->we.endian);
 	cube->ea.texture = mlx_xpm_file_to_image(cube->mlx, cube->ea.name,
 			&cube->ea.height, &cube->ea.width);
 	if (!cube->ea.texture)
 		ft_error("Failed to load the EA texture file");
 	cube->ea.addr = mlx_get_data_addr(cube->ea.texture,
-			&cube->ea.bits_per_pixel,
-			&cube->ea.size_line,
-			&cube->ea.endian);
+			&cube->ea.bits_per_pixel, &cube->ea.size_line, &cube->ea.endian);
 	init_sprites(cube);
-	change_sprite(cube);
 }
 
 void	init_elements(t_cube *cube)
