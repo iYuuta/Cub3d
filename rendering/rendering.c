@@ -46,7 +46,7 @@ void	draw_pixel(t_cube *cub, int x, int y, int tex_y)
 		color = get_pixel_color(cub->ea, cub->column.tex_x, tex_y);
 	else if (cub->column.wall == WEST)
 		color = get_pixel_color(cub->we, cub->column.tex_x, tex_y);
-	else if (cub->column.wall == DOOR)
+	else
 		color = get_pixel_color(cub->door[cub->curr_door],
 				cub->column.tex_x, tex_y);
 	pixel_put(cub, x, y, color);
