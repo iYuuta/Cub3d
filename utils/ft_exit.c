@@ -29,8 +29,10 @@ void	ft_exit(int exit_status, t_cube *cube)
 	if (cube)
 	{
 		free_texture(cube);
-		mlx_destroy_window(cube->mlx, cube->win);
-		mlx_destroy_display(cube->mlx);
+		if (cube->mlx && cube->win)
+			mlx_destroy_window(cube->mlx, cube->win);
+		if (cube->mlx)
+			mlx_destroy_display(cube->mlx);
 	}
 	exit(exit_status);
 }
