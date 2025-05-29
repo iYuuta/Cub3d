@@ -101,28 +101,28 @@ void	draw_minimap_border(t_cube *cube)
 
 void	render_minimap(t_cube *cube)
 {
-	int	dx;
-	int	dy;
+	int	x;
+	int	y;
 	int	map_x;
 	int	map_y;
 	int	color;
 
 	cube->minimap.player_x = (int)(cube->player.x / TILE_SIZE);
 	cube->minimap.player_y = (int)(cube->player.y / TILE_SIZE);
-	dy = -cube->minimap.radius;
-	while (dy <= cube->minimap.radius)
+	y = -cube->minimap.radius;
+	while (y <= cube->minimap.radius)
 	{
-		dx = -cube->minimap.radius;
-		while (dx <= cube->minimap.radius)
+		x = -cube->minimap.radius;
+		while (x <= cube->minimap.radius)
 		{
-			map_x = cube->minimap.player_x + dx;
-			map_y = cube->minimap.player_y + dy;
+			map_x = cube->minimap.player_x + x;
+			map_y = cube->minimap.player_y + y;
 			color = get_color(map_x, map_y, cube);
-			draw_minimap_tile(cube, dx + cube->minimap.radius, dy
+			draw_minimap_tile(cube, x + cube->minimap.radius, y
 				+ cube->minimap.radius, color);
-			dx++;
+			x++;
 		}
-		dy++;
+		y++;
 	}
 	draw_minimap_border(cube);
 	draw_minimap_player(cube);
