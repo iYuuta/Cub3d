@@ -62,7 +62,7 @@ int	main(int argc, char **argv)
 {
 	t_cube	cube;
 
-	ft_memset(&cube, 0 , sizeof(t_cube));
+	ft_memset(&cube, 0, sizeof(t_cube));
 	cube.sprite_timer = current_time();
 	parse(argc, argv, &cube);
 	init_mlx(&cube);

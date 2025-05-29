@@ -35,17 +35,17 @@ static void	draw_minimap_player(t_cube *cube)
 		while (x < cube->minimap.size)
 		{
 			pixel_put(cube, cube->minimap.center_x - cube->minimap.size / 2 + x,
-				cube->minimap.center_y - cube->minimap.size / 2 + y, 0xE60000);
+				cube->minimap.center_y - cube->minimap.size / 2 + y, 0x7D460F);
 			x++;
 		}
 		y++;
 	}
 	i = 0;
-	while (i < cube->minimap.size + 5)
+	while (i < cube->minimap.size + 4)
 	{
 		x = cube->minimap.center_x + (int)(cos(cube->player.h_angle) * i);
 		y = cube->minimap.center_y + (int)(sin(cube->player.h_angle) * i);
-		pixel_put(cube, x, y, 0xFF0000);
+		pixel_put(cube, x, y, 0x7D460F);
 		i++;
 	}
 }

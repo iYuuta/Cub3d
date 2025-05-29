@@ -2,7 +2,6 @@
 
 int	close_window(t_cube *cube)
 {
-
 	ft_exit(EXIT_SUCCESS, cube);
 	return (0);
 }
